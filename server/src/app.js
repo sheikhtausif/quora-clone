@@ -7,10 +7,7 @@ const app = express()
 app.use(express.json())
 app.use(cors())
 
-app.get('/', (req, res) => {
-    const msg = "Hello World"
-    return res.status(200).json({ msg })
-})
+
 
 app.listen(PORT, () => {
     connect()
