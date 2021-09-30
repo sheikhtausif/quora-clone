@@ -4,16 +4,17 @@
     background: #fff;
     position: sticky;
     top: 0;
+    border-bottom: 1px solid rgb(224, 221, 221);
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 
 .nav_flex {
     width: 66.5%;
     margin: auto;
     display: flex;
-    /* justify-content: space-between; */
     align-items: center;
-    border: 1px solid;
     padding-right: 6px;
+    /* border: 1px solid; */
 }
 
 .right, .left {
@@ -41,7 +42,7 @@
 }
 
 .inp_box {
-    border: 1px solid grey;
+    border: 1px solid rgb(224, 221, 221);
     border-radius: 4px;
 }
 
@@ -102,7 +103,7 @@
     top: 50px;
     left: 62.5%;
     width: 260px;
-    height: 82.4%;
+    height: 81%;
     background: #fff;
     border-radius: 4px;
     border: 1px solid gray;

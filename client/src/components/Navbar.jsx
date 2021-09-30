@@ -28,8 +28,6 @@ const Navbar = ({ handleTheme }) => {
         setOpen(false);
     };
 
-
-
     const nav = [
         { icon: <Logo />, text: "" },
         { icon: <Home />, text: "Home" },
@@ -56,7 +54,7 @@ const Navbar = ({ handleTheme }) => {
                     <GrNext />
                 </div>
             </div>
-            <hr style={{ color: 'grey' }} />
+            <hr style={{ color: '#F1F2F2' }} />
             <div>
                 {profile_details.map((el, i) => (
                     <div key={i} className={styles.profile_details}>
@@ -65,7 +63,7 @@ const Navbar = ({ handleTheme }) => {
                     </div>
                 ))}
             </div>
-            <hr style={{ color: 'grey' }} />
+            <hr style={{ color: '#F1F2F2' }} />
             <div>
                 <div className={styles.theme}>
                     <p>Dark mode</p>
