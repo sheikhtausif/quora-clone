@@ -188,3 +188,9 @@ hr+div+hr+div:nth-child(n) {
     cursor: pointer;
     text-decoration: underline;
 }
+
+/* .active {
+    color: #A82723;
+    display: inline-block;
+    border-bottom: 5px solid #A82723;
+} */

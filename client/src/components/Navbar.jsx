@@ -110,7 +110,7 @@ const Navbar = ({ handleTheme }) => {
                         <div className={styles.add_ques}>Add question</div>
                     </div>
                 </nav>
-            </div>
+            </div >
             <div>
                 <Modal
                     open={open}
