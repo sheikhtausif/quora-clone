@@ -1,0 +1,9 @@
+.main_part{
+    height:auto;
+    width:67%;
+    /* border: 1px solid red; */
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+
+}
