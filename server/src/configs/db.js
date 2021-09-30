@@ -1,8 +1,6 @@
-const mongoose = require('mongoose')
+const mongoose = require("mongoose");
+const { MONGOURI } = require("../keys");
 
-const connect = async () => {
-    await mongoose.connect('mongodb://localhost:27017/quoradb')
-    console.log("connection has been established with quoradb")
-}
-
-module.exports = connect
+module.exports = () => {
+  return mongoose.connect(MONGOURI);
+};

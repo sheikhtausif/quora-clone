@@ -1,15 +1,24 @@
 import React from 'react'
+import { useState } from 'react'
 import './App.css';
-import Card from './components/Card';
-import Left from './components/Left';
+
 import Main from './components/Main';
-import Right from './components/Right';
+
+import Navbar from './components/Navbar';
 
 const App = () => {
+    const [theme, setTheme] = useState(true)
+    // console.log('theme:', theme)
+
+    const handleTheme = () => {
+        setTheme(!theme)
+    }
     return (
-        <div>
-           <Main/>
-        </div>
+       
+        <div className="App" styles={!theme ? { color: "#fff", background: "black" } : ""}>
+            <Navbar handleTheme={handleTheme} />
+            <Main/>
+        </div >
     )
 }
 
