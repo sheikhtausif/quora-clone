@@ -1,11 +1,12 @@
 import React from 'react'
 import './App.css';
+import Front from './components/LoginSignup/LoginSignup';
 
 const App = () => {
     return (
-        <div>
-            <h1>Hello new World</h1>
-        </div>
+        
+           <Front/>
+        
     )
 }
 
