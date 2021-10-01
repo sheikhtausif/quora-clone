@@ -1,5 +1,6 @@
 import React from 'react'
 import { useState } from 'react'
+import { useHistory, Link } from 'react-router-dom'
 import styles from '../styles/navbar.module.css'
 import Logo from '../svg/Logo'
 import Home from '../svg/Home'
@@ -23,6 +24,7 @@ import Question from './Question'
 const Navbar = ({ handleTheme }) => {
     const [open, setOpen] = useState(false);
     const [openQ, setOpenQ] = useState(false);
+    const history = useHistory()
 
     const handleOpenQ = () => setOpenQ(true);
     const handleCloseQ = () => setOpenQ(false);
@@ -30,13 +32,18 @@ const Navbar = ({ handleTheme }) => {
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
+    const handleProfile = () => {
+        setOpen(false)
+        history.push('/profile')
+    }
+
     const nav = [
-        { icon: <Logo />, text: "" },
-        { icon: <Home />, text: "Home" },
-        { icon: <Following />, text: "Followings" },
-        { icon: <Answer />, text: "Answers" },
-        { icon: <Space />, text: "Space" },
-        { icon: <Notification />, text: "Notifications" },
+        { icon: <Logo />, text: "", to: '/' },
+        { icon: <Home />, text: "Home", to: '/' },
+        { icon: <Following />, text: "Followings", to: "following" },
+        { icon: <Answer />, text: "Answers", to: '/answers' },
+        { icon: <Space />, text: "Space", to: '/spaces' },
+        { icon: <Notification />, text: "Notifications", to: '/notifications' },
     ]
     const profile_details = [
         { icon: <Message />, text: "Message" },
@@ -51,7 +58,7 @@ const Navbar = ({ handleTheme }) => {
         <div className={styles.modal_body}>
             <div className={styles.profile_div}>
                 <div className={styles.profile_img}>T</div>
-                <div>
+                <div onClick={handleProfile}>
                     <h3>Mohd Tausif</h3>
                     <GrNext />
                 </div>
@@ -86,7 +93,7 @@ const Navbar = ({ handleTheme }) => {
                 <p>Press</p>
                 <p>Your Ad Choices</p>
             </div>
-        </div>
+        </div >
     );
 
     return (
@@ -96,7 +103,7 @@ const Navbar = ({ handleTheme }) => {
                     <div className={styles.left}>
                         {nav.map((el, i) => (
                             <div key={i} className={styles.icons}>
-                                {el.icon}
+                                <Link to={el.to}>{el.icon}</Link>
                             </div>
                         ))}
                     </div>
