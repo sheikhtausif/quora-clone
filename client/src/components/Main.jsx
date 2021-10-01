@@ -4,6 +4,9 @@ import styles from "../styles/main.module.css"
 import Left from './Left'
 import Card from './Card';
 import Right from './Right';
+import Middle from "./Middle"
+import Second_middle from "./Second_middle"
+import CreatePost from './CreatePost';
 const Main = () => {
     return (
         <div className={styles.main_part}> 
@@ -11,13 +14,18 @@ const Main = () => {
               <Left/>
             </div>
 
-            <div style={{width:"52%"}}>
+            <div style={{width:"53%"}}>
+                <Middle/>
+                <Second_middle/>
                 <Card/>
             </div>
 
-            <div style={{width:"23%"}}>
+            <div style={{width:"20%"}}>
                 <Right/>
-            </div>      
+            </div> 
+
+{/* 
+            <CreatePost/>      */}
         </div>
     )
 }

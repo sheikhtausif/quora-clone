@@ -111,6 +111,11 @@
     /* overflow-y: scroll; */
 }
 
+.profile_div:hover {
+    cursor: pointer;
+    opacity: 0.4;
+}
+
 .profile_div, hr+div {
     padding: 14px;
     display: flex;

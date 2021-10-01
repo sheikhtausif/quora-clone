@@ -10,7 +10,6 @@ const authenticate = require("../middleware/authenticate");
 
 router.get("/", authenticate, async (req, res) => {
   const users = await User.find().lean().exec();
-
   return res.status(200).json({ users });
 });
 
@@ -32,7 +31,7 @@ router.get("/user/:id", authenticate, (req, res) => {
     });
 });
 
-router.put("/follow", signinRe, (req, res) => {
+router.put("/follow", authenticate, (req, res) => {
   User.findByIdAndUpdate(
     req.body.followId,
     {
@@ -63,7 +62,7 @@ router.put("/follow", signinRe, (req, res) => {
   );
 });
 
-router.put("/unfollow", signinRe, (req, res) => {
+router.put("/unfollow", authenticate, (req, res) => {
   User.findByIdAndUpdate(
     req.body.unfollowId,
     {
@@ -94,7 +93,7 @@ router.put("/unfollow", signinRe, (req, res) => {
   );
 });
 
-router.put("/updatepic", signinRe, (req, res) => {
+router.put("/updatepic", authenticate, (req, res) => {
   User.findByIdAndUpdate(
     req.user._id,
     { $set: { pic: req.body.pic } },

@@ -1,9 +1,10 @@
 .main_part{
     height:auto;
-    width:67%;
+    width:63%;
     /* border: 1px solid red; */
     margin: auto;
     display: flex;
     justify-content: space-between;
+    margin-top: 10px;
 
 }

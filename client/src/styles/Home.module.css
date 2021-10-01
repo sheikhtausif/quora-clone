@@ -1,0 +1,11 @@
+.create_post_md {
+    margin: 30px auto !important;
+    max-width: 600px;
+    text-align: center;
+  }
+  .create_post_md > div {
+    padding: 20px 30px;
+  }
+  .homeMainDiv {
+    height: 120%;
+  }
