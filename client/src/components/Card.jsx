@@ -7,7 +7,7 @@ import Share from "../svg/Share";
 import Comments from "../svg/Comments";
 import Share_icon from "../svg/Share_icon";
 import Dotted_icon from "../svg/Dotted_icon";
-import { Link } from "react-router-dom";
+
 const Card = () => {
   const data = [
     {

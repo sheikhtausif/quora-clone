@@ -1,0 +1,65 @@
+.add_ques {
+    width: 110px;
+    text-align: center;
+    padding: 8px;
+    border-radius: 20px;
+    background: #ebecee;
+    margin: auto;
+}
+
+.terms {
+    width: 85%;
+    margin: 8px auto;
+    margin-top: 40px;
+    background: #EBF0FF;
+    color: #1A5AFF;
+    padding: 14px;
+    border-radius: 4px;
+}
+
+ul {
+    margin-left: 20px;
+}
+
+.ques_div {
+    width: 89%;
+    margin: auto;
+    margin-top: 20px;
+}
+
+.ques_div>p {
+    font-size: 12px;
+    font-weight: 400;
+    color: grey;
+}
+
+.ques_div>input {
+    outline: none;
+    margin-top: 12px;
+    width: 100%;
+    border: none;
+    font-size: 20px;
+    border-bottom: 1px solid #b3acac;
+}
+
+.ques_btn {
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+}
+
+.ques_btn>button {
+    width: 120px;
+    padding: 10px;
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.ques_btn>button:last-child {
+    background: #1A5AFF;
+    color: white;
+}
