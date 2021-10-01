@@ -1,13 +1,13 @@
 import styles from "../../styles/login.module.css"
 
-import { FacebookLoginButton } from "react-social-login-buttons";
-import { GoogleLoginButton } from "react-social-login-buttons";
-import { styled, Box, color } from "@mui/system";
+
+import { styled, Box } from "@mui/system";
 import ModalUnstyled from "@mui/core/ModalUnstyled";
 import { useState } from "react";
 import ClearIcon from '@mui/icons-material/Clear';
 import { FcGoogle } from "react-icons/fc"
 import { SiFacebook } from "react-icons/si"
+
 
 const StyledModal = styled(ModalUnstyled)`
   position: fixed;
@@ -142,7 +142,9 @@ export default function Front(){
                         </div>
                         <div className={styles.loginDiv}>
                             <h5 style={{color:"grey",fontWeight:"normal"}}>Forgot password?</h5>
+                            
                             <button
+
                             onClick={()=>{
                               const payload={
                                 email:email,
@@ -154,6 +156,7 @@ export default function Front(){
                               setEmail("")
                             }}
                             >Login</button>
+                            
                         </div>
                 </div>
 
@@ -193,6 +196,7 @@ export default function Front(){
             <input type="text" onChange={(e)=>{setSpassword(e.target.value)}} placeholder="Your Password"/>
             </div>
             <div className={styles.modelBorderDiv} ></div>
+
             <button 
              onClick={()=>{
                const payload={

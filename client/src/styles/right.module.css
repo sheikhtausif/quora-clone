@@ -1,0 +1,37 @@
+.right_side_spaces{
+   height: 700px;
+   width: 100%; 
+   
+}
+.space_image{
+    border-radius: 10px;
+}
+.first_line{
+    margin: 10px 10px 10px 20px;
+}
+
+.space_main{
+    display: flex;
+    gap: 8px;
+    width: 85%;
+    margin: auto;
+}
+.space_des{
+    margin-top: 3px;
+    font-size:14px;
+}
+.space_line{
+    width: 85%;
+    height: 0px;
+    background-color:whitesmoke;
+    margin: auto;
+    margin: 20px 10px 10px 20px;
+    color: #939598;
+}
+.first_hr{
+    margin-bottom:10px;
+}
+.space_para{
+  font-size:small
+ 
+}
