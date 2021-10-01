@@ -5,7 +5,9 @@ import Upvote from "../svg/Upvote";
 import Downvote from "../svg/Downvote";
 import Share from "../svg/Share";
 import Comments from "../svg/Comments";
-
+import Share_icon from "../svg/Share_icon";
+import Dotted_icon from "../svg/Dotted_icon";
+import { Link } from "react-router-dom";
 const Card = () => {
   const data = [
     {
@@ -70,30 +72,45 @@ const Card = () => {
             </div>
           );
         })}
-        <div className={styles.cardlast_section}>
-          <div className={styles.vote}>
-            <button className={styles.button_upvoted}>
-              <Upvote />
-              <p>12.4k</p>
-            </button>
+        <div className={styles.all_icons}>
+          <div className={styles.cardlast_section}>
+            <div className={styles.vote}>
+              <button className={styles.button_upvoted}>
+                <Upvote />
+                <p>12.4k</p>
+              </button>
 
-            <button className={styles.button_voted}>
-              <Downvote />
-            </button>
+              <button className={styles.button_voted}>
+                <Downvote />
+              </button>
+            </div>
+
+            <div className={styles.share}>
+              <button className={styles.button_upvoted}>
+                <Share />
+                <p>78</p>
+              </button>
+            </div>
+
+            <div className={styles.comments}>
+              <button className={styles.button_upvoted}>
+                <Comments />
+                <p>68</p>
+              </button>
+            </div>
           </div>
 
-          <div className={styles.share}>
-            <button  className={styles.button_upvoted}>
-              <Share />
-              <p>78</p>
-            </button>
-          </div>
-
-          <div className={styles.comments}>
-            <button  className={styles.button_upvoted}>
-              <Comments />
-              <p>68</p>
-            </button>
+          <div className={styles.dotted_share}>
+            <div className={styles.comments}>
+              <button className={styles.button_voted}>
+                <Share_icon />
+              </button>
+            </div>
+            <div className={styles.comments}>
+              <button className={styles.button_voted}>
+                <Dotted_icon />
+              </button>
+            </div>
           </div>
         </div>
       </Paper>

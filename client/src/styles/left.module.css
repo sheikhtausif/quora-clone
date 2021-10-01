@@ -22,3 +22,20 @@
   font-size: 13px;
   color: grey;
 }
+
+.fileinput{
+  height: 30px;
+  width: 100%;
+  background-color:rgb(246, 246, 246);
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top:10px;
+  padding-bottom: 10px;
+  border-radius: 5px;
+}
+
+.createpost{
+    float: right;
+   margin-top: 15px;
+
+}
