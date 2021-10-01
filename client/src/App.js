@@ -1,19 +1,23 @@
 import "./App.css";
-import React, { useEffect, createContext, useReducer, useContext } from "react";
-
-import { reducer, initialState } from "./store/reducer";
+import React, {
+  useState,
+  useEffect,
+  createContext,
+  useReducer,
+  useContext,
+} from "react";
 import { BrowserRouter, Route, Switch, useHistory } from "react-router-dom";
-import { useState } from "react";
-import Front from "./components/LoginSignup/LoginSignup";
 import Main from "./components/Main";
 import Navbar from "./components/Navbar";
 import Profile from "./components/Profile";
+import { reducer, initialState } from "./store/reducer";
+import Front from "./components/LoginSignup/LoginSignup";
+
 export const UserContext = createContext();
 
 const Routing = () => {
-  const history = useHistory();
-
   const [theme, setTheme] = useState(true);
+  const history = useHistory();
   // console.log('theme:', theme)
   const handleTheme = () => {
     setTheme(!theme);
