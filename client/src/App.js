@@ -1,12 +1,11 @@
-import { Switch,Route } from 'react-router-dom';
-import React from 'react'
-import { useState } from 'react'
 import './App.css';
+import React from 'react'
+import { Switch, Route } from 'react-router-dom'
+import { useState } from 'react'
 import Front from './components/LoginSignup/LoginSignup';
-
 import Main from './components/Main';
-
 import Navbar from './components/Navbar';
+import Profile from './components/Profile';
 
 const App = () => {
     const [theme, setTheme] = useState(true)
@@ -27,12 +26,18 @@ const App = () => {
                 <Route exact path='/register'>
                     <Front/>
                 </Route>
+                <Route exact path='/profile'>
+                <Navbar handleTheme={handleTheme} />
+                    <Profile/>
+                </Route>
             </Switch>
         </div>
 
         
        
 
+
+       
     )
 }
 
