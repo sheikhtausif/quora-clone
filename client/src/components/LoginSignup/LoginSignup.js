@@ -2,10 +2,12 @@ import styles from "../../styles/login.module.css"
 
 import { FacebookLoginButton } from "react-social-login-buttons";
 import { GoogleLoginButton } from "react-social-login-buttons";
-import { styled, Box } from "@mui/system";
+import { styled, Box, color } from "@mui/system";
 import ModalUnstyled from "@mui/core/ModalUnstyled";
 import { useState } from "react";
 import ClearIcon from '@mui/icons-material/Clear';
+import { FcGoogle } from "react-icons/fc"
+import { SiFacebook } from "react-icons/si"
 
 const StyledModal = styled(ModalUnstyled)`
   position: fixed;
@@ -42,15 +44,34 @@ const style = {
 
 export default function Front(){
     const [open, setOpen] = useState(false);
+    const [color,setColor]=useState("white")
+    const [color1,setColor1]=useState("white")
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+    
 
     const handleMouseEnter = e => {
-        e.target.style.background = "lightGrey"
+        e.target.style.background = "#f6f6f6"
         
       }
       const handleMouseLeave = e => {
         e.target.style.background = "white"
+        
+      }
+      const handleMouseEnter1 = e => {
+        setColor("#f6f6f6") 
+        
+      }
+      const handleMouseLeave1 = e => {
+        setColor("white") 
+        
+      }
+      const handleMouseEnter11 = e => {
+        setColor1("#f6f6f6") 
+        
+      }
+      const handleMouseLeave11 = e => {
+        setColor1("white") 
         
       }
 
@@ -63,15 +84,22 @@ export default function Front(){
 
             <div className={styles.container1stdiv2ndDiv}>
                 <div className={styles.container1stdiv2ndDiv1stDiv}>
-                <GoogleLoginButton onClick={() => alert("Hello")} >
-                <h5 style={{fontWeight:"lighter"}}>Continue with Google</h5>
-                </GoogleLoginButton>
-                <div className={styles.facebookdiv}>
-                <FacebookLoginButton
-              
-                 onClick={() => alert("Hello")}>
-                        <h5 style={{fontWeight:"lighter"}}>Continue with Facebook</h5>
-                </FacebookLoginButton>
+                  <div style={{backgroundColor:`${color1}`}}
+                  onMouseEnter={handleMouseEnter11}
+                  onMouseLeave={handleMouseLeave11}
+                  className={styles.googleDiv}>
+                  <FcGoogle style={{fontSize:"23px"}}/>
+                  <h4 style={{fontWeight:"lighter"}}>Continue with Google</h4>
+                  </div>
+                
+                
+                <div 
+                onMouseEnter={handleMouseEnter1}
+                onMouseLeave={handleMouseLeave1}
+                style={{marginTop:"10px",backgroundColor:`${color}`}} className={styles.googleDiv}>
+                      <SiFacebook style={{fontSize:"23px",color:"blue"}}/>
+                        <h4 style={{fontWeight:"lighter"}}>Continue with Facebook</h4>
+                
                
                 </div>
                 <button 
@@ -79,10 +107,10 @@ export default function Front(){
                 onMouseLeave={handleMouseLeave}
                 onClick={handleOpen}
                 className={styles.emailbutton}>
-                    Sign up with Email
+                    Sign up with email
                 </button>
-                <hr style={{border:"1px solid lightGray" , marginTop:"2px"}}/>
-                <h5 style={{color:"grey",marginTop:"4px",fontWeight:"normal"}}>
+                <div style={{height:"1px",backgroundColor:"#E6E7E8" , }}></div>
+                <h5 style={{color:"grey",marginTop:"8px",fontWeight:"normal"}}>
                 By continuing you indicate that you agree to Quora’s Terms of Service and Privacy Policy.
                 </h5>
                

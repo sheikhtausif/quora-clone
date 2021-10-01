@@ -1,7 +1,7 @@
 .container{
     background-image: url(https://qsf.fs.quoracdn.net/-4-ans_frontend_assets.images.home_page_bg_desktop.png-26-4770753d59b970e1.png);
     width: 100%;
-    height: 100vh;
+    height: 95vh;
     
     background-repeat: "no-repeat";
     padding-top: 2%;
@@ -29,7 +29,7 @@
     color: #636466;
 }
 .container1stdiv2ndDiv{
-    width: 90%;
+    width: 93%;
     
     margin: auto;
     
@@ -43,18 +43,20 @@
 .emailbutton{
     width: 100%;
     height: 35px;
-    margin-bottom: 5px;
+    margin-top: 7px;
+    margin-bottom: 7px;
     border: 2px white;
     border-radius: 50px;
+    color: gray;
 }
 .container1stdiv2ndDiv1stDiv{
-    width: 45%;
+    width: 46%;
     
 }
 .container1stdiv2ndDiv3rdDiv{
-    width: 45%;
+    width: 46%;
     
-    margin-left: 5%;
+    margin-left: 4%;
 }
 .container1stdiv2ndDiv3rdDiv>hr{
     border: 1px solid lightgray;
@@ -76,19 +78,21 @@
     border-radius: 2px;
     padding-left: 10px;
 }
-.loginDiv{
+/* .loginDiv{
     display: flex;
 
-}
+} */
 .loginDiv>h5{
     color: lightgray;
+    margin-top: 10px;
 }
 .loginDiv>button{
     width: 80px;
     height: 40px;
     border: white;
     border-radius: 40px;
-    margin-left: 92px;
+    float: right;
+    margin-top: -30px;
     background-color: #2E69FF;
     color: white;
     font-weight: bold;
@@ -98,7 +102,7 @@
     width: 1px;
     height: 300px;
     background-color: #E6E7E8;
-    margin-left: 5%;
+    margin-left: 4%;
 }
 
 
@@ -128,4 +132,15 @@
 .inputsLabel{
     font-weight: bold;
     font-size: 13.5px;
+}
+.googleDiv{
+    display: flex;
+    border: 1px solid lightgray;
+    height: 35px;
+    padding-left: 10px;
+    padding-top: 10px;
+    border-radius: 3px;
+}
+.googleDiv>h4{
+    margin-left: 10px;
 }
