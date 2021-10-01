@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
-const { MONGOURI } = require("../keys");
+// const { MONGOURI } = require("../keys");
 
 module.exports = () => {
-  return mongoose.connect(MONGOURI);
+  return mongoose.connect("mongodb://localhost:27017/quoradbs");
 };
