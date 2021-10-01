@@ -136,9 +136,9 @@ export default function Front(){
                         <div style={{height:"1px",backgroundColor:"#E6E7E8" , marginTop:"10px",}}></div>
                         <div style={{marginTop:"18px"}}>
                             <p className={styles.inputsLabel}>Email</p>
-                            <input className={styles.inputdiv} onChange={(e)=>setEmail(e.target.value)} type="text" placeholder="Your Email"/>
+                            <input className={styles.inputdiv} value={email} onChange={(e)=>setEmail(e.target.value)} type="text" placeholder="Your Email"/>
                             <p className={styles.inputsLabel}>Password</p>
-                            <input className={styles.inputdiv} onChange={(e)=>{setPassword(e.target.value)}} type="text" placeholder="Your Password"/>
+                            <input className={styles.inputdiv} value={password}  onChange={(e)=>{setPassword(e.target.value)}} type="text" placeholder="Your Password"/>
                         </div>
                         <div className={styles.loginDiv}>
                             <h5 style={{color:"grey",fontWeight:"normal"}}>Forgot password?</h5>
@@ -189,11 +189,11 @@ export default function Front(){
             <div className={styles.modelDiv}>
             <h3 style={{marginBottom:"20px",marginTop:"5px"}}>Sign up</h3>
             <h5>Name</h5>
-            <input type="text" onChange={(e)=>{setSname(e.target.value)}} placeholder="What would you liked to be called ?"/>
+            <input type="text" value={sname} onChange={(e)=>{setSname(e.target.value)}} placeholder="What would you liked to be called ?"/>
             <h5>Email</h5>
-            <input type="text" onChange={(e)=>{setSemail(e.target.value)}} placeholder="Your email"/>
+            <input type="text" value={semail} onChange={(e)=>{setSemail(e.target.value)}} placeholder="Your email"/>
             <h5>Password</h5>
-            <input type="text" onChange={(e)=>{setSpassword(e.target.value)}} placeholder="Your Password"/>
+            <input type="text" value={spassword} onChange={(e)=>{setSpassword(e.target.value)}} placeholder="Your Password"/>
             </div>
             <div className={styles.modelBorderDiv} ></div>
 
