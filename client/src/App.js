@@ -14,10 +14,10 @@ const App = () => {
         setTheme(!theme)
     }
     return (
-       
+
         <div className="App" styles={!theme ? { color: "#fff", background: "black" } : ""}>
             <Navbar handleTheme={handleTheme} />
-            <Main/>
+            <Main />
         </div >
     )
 }

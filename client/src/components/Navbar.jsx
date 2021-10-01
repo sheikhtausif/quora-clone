@@ -1,4 +1,5 @@
 import React from 'react'
+import { useState } from 'react'
 import styles from '../styles/navbar.module.css'
 import Logo from '../svg/Logo'
 import Home from '../svg/Home'
@@ -16,17 +17,18 @@ import Bookmark from '../svg/Bookmark'
 import Draft from '../svg/Draft'
 import Modal from '@material-ui/core/Modal';
 import { GrNext } from 'react-icons/gr';
+import Question from './Question'
+// import { ReactComponent as Language } from '../svg/language.svg'
 
 const Navbar = ({ handleTheme }) => {
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = useState(false);
+    const [openQ, setOpenQ] = useState(false);
 
-    const handleOpen = () => {
-        setOpen(true);
-    };
+    const handleOpenQ = () => setOpenQ(true);
+    const handleCloseQ = () => setOpenQ(false);
 
-    const handleClose = () => {
-        setOpen(false);
-    };
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
 
     const nav = [
         { icon: <Logo />, text: "" },
@@ -107,7 +109,7 @@ const Navbar = ({ handleTheme }) => {
                         </div>
                         <div className={styles.user_circle} onClick={handleOpen}>T</div>
                         <span><Language /></span>
-                        <div className={styles.add_ques}>Add question</div>
+                        <div className={styles.add_ques} onClick={handleOpenQ}>Add question</div>
                     </div>
                 </nav>
             </div >
@@ -119,6 +121,9 @@ const Navbar = ({ handleTheme }) => {
                     aria-describedby="simple-modal-description">
                     {body}
                 </Modal>
+            </div>
+            <div>
+                <Question openQ={openQ} handleCloseQ={handleCloseQ} />
             </div>
         </>
     )
