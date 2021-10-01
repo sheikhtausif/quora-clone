@@ -55,7 +55,7 @@
     
 }
 .container1stdiv2ndDiv3rdDiv{
-    width: 46%;
+    width: 44%;
     
     margin-left: 4%;
 }
@@ -99,6 +99,7 @@
     color: white;
     font-weight: bold;
     cursor: pointer;
+    margin-right: -10px;
 }
 .container1stdiv2ndDiv2ndDiv{
     width: 1px;
