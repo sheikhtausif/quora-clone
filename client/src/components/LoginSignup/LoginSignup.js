@@ -8,6 +8,7 @@ import ClearIcon from "@mui/icons-material/Clear";
 import { FcGoogle } from "react-icons/fc";
 import { SiFacebook } from "react-icons/si";
 import Alert from "@mui/material/Alert";
+import { RiArrowRightSLine } from "react-icons/ri";
 const StyledModal = styled(ModalUnstyled)`
   position: fixed;
   z-index: 1300;
@@ -174,9 +175,30 @@ export default function Front() {
           dispatch({ type: "USER", payload: data.user });
           history.push("/");
         }
-      })
-      .catch((err) => {
-        console.log("err", err);
+        fetch("http://localhost:8000/login", {
+          method: "post",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            password,
+            email,
+          }),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.error) {
+              console.log("dataERR:", data);
+            } else {
+              localStorage.setItem("jwt", data.token);
+              localStorage.setItem("user", JSON.stringify(data.user));
+              dispatch({ type: "USER", payload: data.user });
+              history.push("/");
+            }
+          })
+          .catch((err) => {
+            console.log("err", err);
+          });
       });
   };
 
@@ -289,7 +311,9 @@ export default function Front() {
           }}
         ></div>
         <div className={styles.bottomDiv1}>
-          <p>hindi</p>
+          <p>
+            हिन्दी <RiArrowRightSLine />
+          </p>
         </div>
         <div className={styles.bottomDiv2}>
           <h5>

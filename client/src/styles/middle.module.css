@@ -1,44 +1,41 @@
-.middle_main{
-    box-sizing: border-box;
-    padding-left: 16px;
-    padding-right: 16px;
+.middle_main {
+  box-sizing: border-box;
+  padding-left: 16px;
+  padding-right: 16px;
 
-    font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
-    font-size: calc(15px * var(--dynamic-font-scale,1));
-    line-height: 1.4;
-    color: rgb(40, 40, 41);
-    direction: ltr;
-    padding-bottom: 16px;
-    padding-top: 16px;
+  font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  font-size: calc(14px * var(--dynamic-font-scale, 1));
+  line-height: 1.4;
+  color: rgb(40, 40, 41);
+
+  padding-bottom: 16px;
+  padding-top: 16px;
 }
 
-.quora_plus_image{
-    box-sizing: border-box;
-    max-width: 100%;
-    height: 100%;
-    width: 120px;
-    flex-basis: 15%;
+.quora_plus_image {
+  box-sizing: border-box;
+  max-width: 100%;
+  height: 100%;
+  width: 120px;
+  flex-basis: 15%;
 }
 
-.quora_plus{
-    display: flex;
+.quora_plus {
+  display: flex;
 }
-.btn_learn_more{
-    padding: 0px 20px;
-    height: 38px;
-    min-width: 38px;
-  
-    transition-property: box-shadow, background-color;
-    transition-duration: 60ms;
-    transition-timing-function: ease-out;
-    border-width: 0px;
-    outline: none;
-    background-color: #2e69ff;
-    text-align: center;
-    color: white;
-    border-radius:30px;
+.btn_learn_more {
+  padding: 0px 20px;
+  height: 38px;
+  min-width: 38px;
+  transition-property: box-shadow, background-color;
+  transition-duration: 60ms;
+  transition-timing-function: ease-out;
+  border-width: 0px;
+  outline: none;
+  background-color: #2e69ff;
+  text-align: center;
+  color: white;
+  border-radius: 30px;
+  margin-top: -15px;
 }
-
-
-
-
