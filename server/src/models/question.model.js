@@ -2,8 +2,7 @@ const mongoose = require("mongoose");
 
 const questionSchema = new mongoose.Schema(
   {
-    title: { type: String, required: true },
-    body: { type: String, required: true },
+    question: { type: String, required: true },
     upvotes: [{ type: mongoose.Schema.Types.ObjectId, ref: "user" }],
     comments: [
       {
