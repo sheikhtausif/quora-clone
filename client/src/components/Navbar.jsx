@@ -1,5 +1,4 @@
-import React from 'react'
-import { useState } from 'react'
+import React,{useContext,useRef,useEffect,useState} from "react";
 import { useHistory, Link } from 'react-router-dom'
 import styles from '../styles/navbar.module.css'
 import Logo from '../svg/Logo'
@@ -19,11 +18,13 @@ import Draft from '../svg/Draft'
 import Modal from '@material-ui/core/Modal';
 import { GrNext } from 'react-icons/gr';
 import Question from './Question'
+import {UserContext} from '../App'
 // import { ReactComponent as Language } from '../svg/language.svg'
 
 const Navbar = ({ handleTheme }) => {
     const [open, setOpen] = useState(false);
     const [openQ, setOpenQ] = useState(false);
+       const {state,dispatch} = useContext(UserContext)
     const history = useHistory()
 
     const handleOpenQ = () => setOpenQ(true);
@@ -81,7 +82,11 @@ const Navbar = ({ handleTheme }) => {
                 <p>Settings</p>
                 <p>Languages</p>
                 <p>Help</p>
-                <p>Logout</p>
+                <p onClick={()=>{
+              localStorage.clear()
+              dispatch({type:"CLEAR"})
+              history.push('/registerr')
+            }}>Logout</p>
             </div>
             <div className={styles.footer}>
                 <p>About</p>

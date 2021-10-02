@@ -21,7 +21,7 @@ const Card = () => {
     })
       .then((res) => res.json())
       .then((result) => {
-        console.log(result);
+        console.log("result",result);
         setData(result.posts);
       });
   }, [])
@@ -109,6 +109,7 @@ const Card = () => {
     <div className={styles.main_card_container}>
       <Paper variant="outlined" square>
         {data.map((el, i) => {
+         //console.log('el:', el)
           return (
             <>
             <div className={styles.secondary_card_container} key={i}>
@@ -118,14 +119,14 @@ const Card = () => {
                     className={styles.main_image}
                     height="50"
                     width="50"
-                    src={el.pic}
-                    alt="images"
+                    src={el.postedBy.pic}
+                    alt="profileimg"
                   />
                 </div>
 
                 <div>
                   <div className={styles.user_intro}>
-                    <h4>{el.name}</h4>
+                    <h4>{el.postedBy.name}</h4>
                     <a href="#">Follow</a>
                   </div>
 
