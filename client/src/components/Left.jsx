@@ -85,7 +85,7 @@ const Left = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-       //console.log('data:PhotoUrl', data)
+       console.log('data:PhotoUrl', data)
         setUrl(data.url);
       })
       .catch((err) => {

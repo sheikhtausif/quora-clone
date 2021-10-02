@@ -47,49 +47,26 @@ export default function Front() {
   const [open, setOpen] = useState(false);
   const [color, setColor] = useState("white");
   const [color1, setColor1] = useState("white");
+  //login func
   const [password, setPasword] = useState("");
   const [email, setEmail] = useState("");
-  const [sname, setSname] = useState("");
-  const [semail, setSemail] = useState("");
-  const [spassword, setSpassword] = useState("");
+
+  /*signup func*/
+  const [name2, setName2] = useState("");
+  const [email2, setEmail2] = useState("");
+  const [password2, setPassword2] = useState("");
+
+  const [image, setImage] = useState("");
+  const [url, setUrl] = useState(undefined);
+
+  useEffect(() => {
+    if (url) {
+      uploadFields();
+    }
+  }, [url]);
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-
-  const PostData = (e) => {
-    if (
-      !/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
-        email
-      )
-    ) {
-      history.push("/");
-      return;
-    }
-    fetch("http://localhost:8000/login", {
-      method: "post",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        password,
-        email,
-      }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.error) {
-          console.log("dataERR:", data);
-        } else {
-          localStorage.setItem("jwt", data.token);
-          localStorage.setItem("user", JSON.stringify(data.user));
-          dispatch({ type: "USER", payload: data.user });
-          history.push("/");
-        }
-      })
-      .catch((err) => {
-        console.log("err", err);
-      });
-  };
 
   const handleMouseEnter = (e) => {
     e.target.style.background = "#f6f6f6";
@@ -110,11 +87,108 @@ export default function Front() {
     setColor1("white");
   };
 
+  const uploadPic = () => {
+    const data = new FormData();
+    data.append("file", image);
+    data.append("upload_preset", "miniinsta");
+    data.append("cloud_name", "rsbrsb");
+    fetch("	https://api.cloudinary.com/v1_1/rsbrsb/image/upload", {
+      method: "post",
+      body: data,
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setUrl(data.url);
+      })
+      .catch((err) => {
+        console.log("err:", err);
+      });
+  };
+
+  const uploadFields = () => {
+    if (
+      !/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
+        email2
+      )
+    ) {
+      console.log("email", email2);
+      alert("Invalid Details");
+      return;
+    }
+    fetch("http://localhost:8000/register", {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: name2,
+        password: password2,
+        email: email2,
+        pic: url,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.error) {
+          console.log("dataERR:", data.err);
+        } else {
+          console.log("dataSign:", data);
+          setOpen(false);
+          // history.push("/registerr");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const PostData = (e) => {
+    e.preventDefault();
+    if (
+      !/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
+        email
+      )
+    ) {
+      history.push("/");
+      return;
+    }
+    fetch("http://localhost:8000/login", {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        password: password,
+        email: email,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("data:check", data);
+        console.log("val", password, email);
+        if (data.error) {
+          alert(data.error);
+        } else {
+          localStorage.setItem("jwt", data.token);
+          localStorage.setItem("user", JSON.stringify(data.user));
+          dispatch({ type: "USER", payload: data.user });
+          history.push("/");
+        }
+      })
+      .catch((err) => {
+        console.log("err", err);
+      });
+  };
+
   const handleLogin = (payload) => {
     console.log(payload);
   };
-  const handleSignup = (payload) => {
-    console.log(payload);
+  const handleSignup = (e) => {
+    if (image) {
+      uploadPic();
+    } else {
+      uploadFields();
+    }
   };
 
   return (
@@ -244,28 +318,22 @@ export default function Front() {
             <h5>Name</h5>
             <input
               type="text"
-              value={sname}
-              onChange={(e) => {
-                setSname(e.target.value);
-              }}
+              value={name2}
+              onChange={(e) => setName2(e.target.value)}
               placeholder="What would you liked to be called ?"
             />
             <h5>Email</h5>
             <input
               type="text"
-              value={semail}
-              onChange={(e) => {
-                setSemail(e.target.value);
-              }}
+              value={email2}
+              onChange={(e) => setEmail2(e.target.value)}
               placeholder="Your email"
             />
             <h5>Password</h5>
             <input
               type="text"
-              value={spassword}
-              onChange={(e) => {
-                setSpassword(e.target.value);
-              }}
+              value={password2}
+              onChange={(e) => setPassword2(e.target.value)}
               placeholder="Your Password"
             />
           </div>
@@ -273,15 +341,7 @@ export default function Front() {
 
           <button
             onClick={() => {
-              const payload = {
-                name: sname,
-                email: semail,
-                password: spassword,
-              };
-              handleSignup(payload);
-              setSname("");
-              setSpassword("");
-              setSemail("");
+              handleSignup();
             }}
             className={styles.modelButton}
           >

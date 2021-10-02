@@ -29,7 +29,7 @@ const Routing = () => {
     if (user) {
       dispatch({ type: "USER", payload: user });
     } else {
-      history.push("/register");
+      history.push("/registerr");
     }
   }, []);
 
@@ -43,7 +43,7 @@ const Routing = () => {
           <Navbar handleTheme={handleTheme} />
           <Main />
         </Route>
-        <Route exact path="/register">
+        <Route exact path="/registerr">
           <Front />
         </Route>
         <Route exact path="/profile">
