@@ -1,9 +1,6 @@
-* {
-  margin: 0;
-  padding: 0;
-}
+
 .main_card_container {
-  height: auto;
+  height: 300px;
   width: 100%;
   margin: auto;
   /* border: 1px solid green; */
@@ -15,10 +12,17 @@
 }
 
 .secondary_card_container {
-  width: auto;
+  width: 100%;
   height: auto;
   /* border: 1px solid green; */
   margin: auto;
+  font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  font-size: calc(13px * var(--dynamic-font-scale,1));
+  line-height: 1.4;
+  color: rgb(40, 40, 41);
+  direction: ltr;
+
+  
 }
 .main_image {
   border-radius: 50px;
@@ -33,7 +37,7 @@
 .user_main_intro {
   display: flex;
   gap: 15px;
-  padding: 15px;
+  padding: 10px;
 }
 .user_about_date {
   display: flex;
@@ -41,7 +45,7 @@
 }
 .post_images {
   height: 400px;
-  width: 505px;
+  width: 532px;
 }
 .answer {
   line-height: 1.3;
@@ -101,3 +105,29 @@
   display: flex;
   justify-content: space-between;
 }
+
+/* box-sizing: border-box;
+}
+<style>
+.cf-inspector-body .q-box {
+    background-color: transparent !important;
+    background-blend-mode: normal !important;
+    border: 0px none rgb(0, 0, 0) !important;
+    box-shadow: none !important;
+}
+
+user agent stylesheet
+div {
+    display: block;
+}
+.qu-dynamicFontSize--regular {
+    font-size: calc(15px * var(--dynamic-font-scale, 1))!important;
+}
+.qu-dynamicFontSize--regular {
+    font-size: calc(15px * var(--dynamic-font-scale, 1))!important;
+}
+<style>
+html, body {
+    height: 100%;
+   
+} */

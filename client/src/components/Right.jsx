@@ -5,50 +5,51 @@ import Paper from "@mui/material/Paper";
 const paper_style = {
   height: "auto",
   width: "100%",
+
 };
 const Right = () => {
-    const data = [
-        {
-            name: "English words",
-            image:
-                "https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8Mnx8fGVufDB8fHx8&w=1000&q=80",
-            description: "A platform where get a new english word to learn daily",
-        },
+  const data = [
+    {
+      name: "English words",
+      image:
+        "https://images.all-free-download.com/images/graphiclarge/canoe_water_nature_221611.jpg",
+      description: "A platform where get a new english word to learn daily",
+    },
 
     {
-      name: "English words",
+      name: "Stock Trading",
       image:
-        "https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8Mnx8fGVufDB8fHx8&w=1000&q=80",
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQ_BkwTwYrGcgURQuPN1cB-yhMG12TrDilfFsRvGH_z_FN4mKdmn0i3nJ1FHRKfqtrBOo&usqp=CAU",
       description: "A platform where get a new english word to learn daily",
     },
     {
-      name: "English words",
+      name: "Financial Markets",
       image:
-        "https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8Mnx8fGVufDB8fHx8&w=1000&q=80",
+        "https://i.pinimg.com/originals/86/86/31/86863191bb49b2d900a630d0c5bebc7e.jpg",
       description: "A platform where get a new english word to learn daily",
     },
     {
-      name: "English words",
+      name: "Communication Skills",
       image:
-        "https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8Mnx8fGVufDB8fHx8&w=1000&q=80",
+        "https://wallpapercrafter.com/desktop/124159-digital-art-artwork-illustration-pixel-art-pixels-pixelated-landscape-nature-evening-dusk-night-Moon-moon-rays-flowers-trees-oriental-Asian-architecture-Asian-torii-ci.jpg",
       description: "A platform where get a new english word to learn daily",
     },
     {
-      name: "English words",
+      name: "Young Entrepreneurs",
       image:
-        "https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8Mnx8fGVufDB8fHx8&w=1000&q=80",
+        "https://wallpapershome.com/images/pages/pic_h/16532.jpeg",
       description: "A platform where get a new english word to learn daily",
     },
     {
-      name: "English words",
+      name: "Exercise & Fitness",
       image:
-        "https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8Mnx8fGVufDB8fHx8&w=1000&q=80",
+        "https://images.all-free-download.com/images/graphicthumb/nature_sauvage_552926.jpg",
       description: "A platform where get a new english word to learn daily",
     },
     {
-      name: "English words",
+      name: "UPSC preparation",
       image:
-        "https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8Mnx8fGVufDB8fHx8&w=1000&q=80",
+        "http://1.bp.blogspot.com/-6PYPT11obnA/Tlc9KFGj1HI/AAAAAAAAFUc/5I_IeithKZ8/s400/Latest-Nature.jpg",
       description: "A platform where get a new english word to learn daily",
     },
   ];

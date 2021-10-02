@@ -1,15 +1,13 @@
-.right_side_spaces{
-   
-   
-}
+
 .lines{
     border-top: 1px solid #ccc;
     display: block;
+    margin-top: -1px;
 }
 .lines_2{
      border-top: 1px solid #ccc;
      display: block;
-     width: 85%;
+     width: 70%;
      margin: auto;
    
    
@@ -24,16 +22,16 @@
 .spaces_main{
     display: flex;
     gap: 8px;
-    width: 85%;
+    width: 90%;
     height: 70px;
     margin: auto; 
-    padding: 0px 0px 0px 5px;
+    padding: 0px 0px 0px 0px;
     margin-top:4px;
     margin-bottom:5px;
 }
 .space_des{
     margin-top: 2px;
-    font-size:14px;
+    font-size:13px;
 }
 .space_line{
     width: 85%;
@@ -45,6 +43,8 @@
 }
 
 .space_para{
-  font-size:small
+  font-size:13px;
+  color: #939598;
+  font-weight: 400;
  
 }

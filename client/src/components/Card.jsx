@@ -9,8 +9,24 @@ import Share from "../svg/Share";
 import Comments from "../svg/Comments";
 import Share_icon from "../svg/Share_icon";
 import Dotted_icon from "../svg/Dotted_icon";
-
+import Box from "@mui/material/Box";
 const Card = () => {
+    // const data = [
+    //   {
+    //     image:
+    //       "https://indieseducation.b-cdn.net/wp-content/uploads/2020/05/Full-stack-1.jpg",
+    //     name: "Amit",
+    //     about: "Enginner",
+    //     date: new Date(),
+    //     question: "what is fullstack?",
+    //     answer:
+    //       "Hands down it has to be the supremely brilliant artist S. Elayaraja from Tamil Nadu, India.",
+    //     images: "https://cdn.wallpapersafari.com/45/48/zaZuT2.jpg",
+    //   },
+    // ];
+    const paper_card = {
+        height: "auto",
+    };
     const [data, setData] = useState([]);
     const { state, dispatch } = useContext(UserContext);
     useEffect(() => {
@@ -106,8 +122,13 @@ const Card = () => {
             })
     }
     return (
-        <div className={styles.main_card_container}>
-            <Paper variant="outlined" square>
+        <Box
+            sx={{
+                width: "auto",
+                marginBottom: "10px",
+            }}
+        >
+            <Paper variant="outlined" sx={paper_card} square>
                 {data.map((el, i) => {
                     return (
                         <div className={styles.secondary_card_container} key={i}>
@@ -115,8 +136,8 @@ const Card = () => {
                                 <div>
                                     <img
                                         className={styles.main_image}
-                                        height="50"
-                                        width="50"
+                                        height="40"
+                                        width="40"
                                         src={el.image}
                                         alt="images"
                                     />
@@ -125,7 +146,7 @@ const Card = () => {
                                 <div>
                                     <div className={styles.user_intro}>
                                         <h4>{el.name}</h4>
-                                        <Link to="#">Follow</Link>
+                                        <a href="#">Follow</a>
                                     </div>
 
                                     <div className={styles.user_about_date}>
@@ -196,7 +217,7 @@ const Card = () => {
                     </div>
                 </div>
             </Paper>
-        </div>
+        </Box>
     );
 };
 

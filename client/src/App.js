@@ -36,7 +36,8 @@ const Routing = () => {
     return (
         <div
             className="App"
-            styles={!theme ? { color: "#fff", background: "black" } : ""}>
+            styles={!theme ? { color: "#fff", background: "black" } : ""}
+        >
             <Switch>
                 <Route exact path="/">
                     <Navbar handleTheme={handleTheme} />
@@ -50,6 +51,8 @@ const Routing = () => {
                     <Profile />
                 </Route>
             </Switch>
+
+
         </div>
     );
 };
