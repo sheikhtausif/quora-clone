@@ -8,6 +8,7 @@ import ClearIcon from "@mui/icons-material/Clear";
 import { FcGoogle } from "react-icons/fc";
 import { SiFacebook } from "react-icons/si";
 import Alert from "@mui/material/Alert";
+import {RiArrowRightSLine} from "react-icons/ri"
 const StyledModal = styled(ModalUnstyled)`
   position: fixed;
   z-index: 1300;
@@ -225,7 +226,7 @@ export default function Front() {
           }}
         ></div>
         <div className={styles.bottomDiv1}>
-          <p>hindi</p>
+          <p>हिन्दी  <RiArrowRightSLine/></p>
         </div>
         <div className={styles.bottomDiv2}>
           <h5>

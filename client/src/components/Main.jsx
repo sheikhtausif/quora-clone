@@ -10,17 +10,17 @@ import CreatePost from './CreatePost';
 const Main = () => {
     return (
         <div className={styles.main_part}> 
-            <div style={{width:"15%"}}>
+            <div style={{width:"18%"}}>
               <Left/>
             </div>
 
-            <div style={{width:"53%"}}>
+            <div style={{width:"55%"}}>
                 <Middle/>
                 <Second_middle/>
                 <Card/>
             </div>
 
-            <div style={{width:"20%"}}>
+            <div style={{width:"21%"}}>
                 <Right/>
             </div> 
 

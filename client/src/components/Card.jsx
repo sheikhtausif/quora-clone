@@ -7,7 +7,7 @@ import Share from "../svg/Share";
 import Comments from "../svg/Comments";
 import Share_icon from "../svg/Share_icon";
 import Dotted_icon from "../svg/Dotted_icon";
-
+import Box from "@mui/material/Box";
 const Card = () => {
   const data = [
     {
@@ -22,10 +22,18 @@ const Card = () => {
       images: "https://cdn.wallpapersafari.com/45/48/zaZuT2.jpg",
     },
   ];
+  const paper_card = {
+    height: "auto",
+  };
 
   return (
-    <div className={styles.main_card_container}>
-      <Paper variant="outlined" square>
+    <Box
+      sx={{
+        width: "auto",
+        marginBottom:"10px",
+      }}
+    >
+      <Paper variant="outlined" sx={paper_card} square>
         {data.map((el, i) => {
           return (
             <div className={styles.secondary_card_container} key={i}>
@@ -33,8 +41,8 @@ const Card = () => {
                 <div>
                   <img
                     className={styles.main_image}
-                    height="50"
-                    width="50"
+                    height="40"
+                    width="40"
                     src={el.image}
                     alt="images"
                   />
@@ -114,7 +122,7 @@ const Card = () => {
           </div>
         </div>
       </Paper>
-    </div>
+    </Box>
   );
 };
 

@@ -37,7 +37,7 @@ const Routing = () => {
       <Switch>
         <Route exact path="/">
           <Navbar handleTheme={handleTheme} />
-          <Main />
+             <Main />
         </Route>
         <Route exact path="/register">
           <Front />
@@ -47,6 +47,8 @@ const Routing = () => {
           <Profile />
         </Route>
       </Switch>
+
+    
     </div>
   );
 };

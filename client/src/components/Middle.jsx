@@ -4,9 +4,11 @@ import Quoraplus from "../svg/Quoraplus" ;
 import Paper from "@mui/material/Paper";
 
 const middle_one={
-  marginTop:"10px",
+ 
   marginBottom:"10px",
-  height: "135px"
+  height: "120px",
+ 
+  
 }
 const Middle = () => {
   return (
