@@ -7,9 +7,10 @@ import Upvote from "../svg/Upvote";
 import Downvote from "../svg/Downvote";
 import Share from "../svg/Share";
 import Comments from "../svg/Comments";
-import Share_icon from "../svg/Share_icon";
-import Dotted_icon from "../svg/Dotted_icon";
+import ShareIcon from "../svg/Share_icon";
+import DottedIcon from "../svg/Dotted_icon";
 import Box from "@mui/material/Box";
+
 const Card = () => {
     // const data = [
     //   {
@@ -146,7 +147,7 @@ const Card = () => {
                                 <div>
                                     <div className={styles.user_intro}>
                                         <h4>{el.name}</h4>
-                                        <a href="#">Follow</a>
+                                        <Link to='#'>Follow</Link>
                                     </div>
 
                                     <div className={styles.user_about_date}>
@@ -206,12 +207,12 @@ const Card = () => {
                     <div className={styles.dotted_share}>
                         <div className={styles.comments}>
                             <button className={styles.button_voted}>
-                                <Share_icon />
+                                <ShareIcon />
                             </button>
                         </div>
                         <div className={styles.comments}>
                             <button className={styles.button_voted}>
-                                <Dotted_icon />
+                                <DottedIcon />
                             </button>
                         </div>
                     </div>

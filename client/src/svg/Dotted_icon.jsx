@@ -1,4 +1,4 @@
-const Dotted_icon = () => {
+const DottedIcon = () => {
     return (
         <svg width="24px" height="24px" viewBox="0 0 24 24">
             <g
@@ -15,4 +15,4 @@ const Dotted_icon = () => {
     );
 };
 
-export default Dotted_icon;
+export default DottedIcon
