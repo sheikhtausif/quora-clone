@@ -20,11 +20,16 @@ import Modal from '@material-ui/core/Modal';
 import { GrNext } from 'react-icons/gr';
 import Question from './Question'
 // import { ReactComponent as Language } from '../svg/language.svg'
+import Tooltip, { tooltipClasses } from '@mui/material/Tooltip';
+import { styled } from '@mui/material/styles';
+import { Active, NoActive } from '../styles/ActiveStyled'
 
 const Navbar = ({ handleTheme }) => {
     const [open, setOpen] = useState(false);
     const [openQ, setOpenQ] = useState(false);
     const history = useHistory()
+    const { pathname } = history.location
+    console.log('pathname:', pathname)
 
     const handleOpenQ = () => setOpenQ(true);
     const handleCloseQ = () => setOpenQ(false);
@@ -38,10 +43,9 @@ const Navbar = ({ handleTheme }) => {
     }
 
     const nav = [
-        { icon: <Logo />, text: "", to: '/' },
         { icon: <Home />, text: "Home", to: '/' },
-        { icon: <Following />, text: "Followings", to: "following" },
-        { icon: <Answer />, text: "Answers", to: '/answers' },
+        { icon: <Following />, text: "Following", to: "/following" },
+        { icon: <Answer />, text: "Answers", to: '/answer' },
         { icon: <Space />, text: "Space", to: '/spaces' },
         { icon: <Notification />, text: "Notifications", to: '/notifications' },
     ]
@@ -96,15 +100,30 @@ const Navbar = ({ handleTheme }) => {
         </div >
     );
 
+    const LightTooltip = styled(({ className, ...props }) => (
+        <Tooltip {...props} classes={{ popper: className }} />))
+        (() => ({
+            [`& .${tooltipClasses.tooltip}`]: {
+                backgroundColor: '#fff',
+                color: 'rgba(63, 60, 60, 0.87)',
+                fontSize: 11,
+                borderRadius: "20px",
+                padding: '6px 14px',
+                border: '0.5px solid rgba(87, 79, 79, 0.87)',
+                outline: 'none',
+            },
+        }));
+
     return (
         <>
             <div className={styles.navbar}>
                 <nav className={styles.nav_flex}>
                     <div className={styles.left}>
+                        <Link to='/'><Logo /></Link>
                         {nav.map((el, i) => (
-                            <div key={i} className={styles.icons}>
-                                <Link to={el.to}>{el.icon}</Link>
-                            </div>
+                            <LightTooltip key={i} title={el.text}>
+                                {pathname === `${el.to}` ? <Active><Link to={el.to}>{el.icon}</Link></Active> : <NoActive><Link to={el.to}>{el.icon}</Link></NoActive>}
+                            </LightTooltip>
                         ))}
                     </div>
                     <div className={styles.right}>

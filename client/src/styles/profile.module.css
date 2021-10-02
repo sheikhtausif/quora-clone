@@ -40,20 +40,21 @@ h1+div>p {
     margin-top: 50px;
     align-items: center;
     gap: 4%;
-    color: rgb(167, 162, 162);
+    color: rgb(151, 144, 144);
     font-size: 13px;
     font-weight: bold;
 }
 
 .profile_details>p {
-    padding: 9px 2px;
-    border-bottom: 4px solid #A82723;
+    padding: 10px 5px;
+    border-radius: 2px;
+    border-bottom: 3.4px solid #A82723;
 }
 
 .profile_details>p:hover {
     cursor: pointer;
     opacity: 0.7;
-    background: rgb(235, 231, 231);
+    background: #EAEFFC;
     color: #413e3e;
 }
 

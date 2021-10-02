@@ -12,6 +12,10 @@ import Navbar from "./components/Navbar";
 import Profile from "./components/Profile";
 import { reducer, initialState } from "./store/reducer";
 import Front from "./components/LoginSignup/LoginSignup";
+import Following from "./components/Following";
+import Answer from "./components/Answer";
+import Spaces from "./components/Spaces";
+import Notifications from "./components/Notifications";
 
 export const UserContext = createContext();
 
@@ -49,6 +53,22 @@ const Routing = () => {
                 <Route exact path="/profile">
                     <Navbar handleTheme={handleTheme} />
                     <Profile />
+                </Route>
+                <Route exact path="/following">
+                    <Navbar handleTheme={handleTheme} />
+                    <Following />
+                </Route>
+                <Route exact path="/answer">
+                    <Navbar handleTheme={handleTheme} />
+                    <Answer />
+                </Route>
+                <Route exact path="/spaces">
+                    <Navbar handleTheme={handleTheme} />
+                    <Spaces />
+                </Route>
+                <Route exact path="/notifications">
+                    <Navbar handleTheme={handleTheme} />
+                    <Notifications />
                 </Route>
             </Switch>
 
