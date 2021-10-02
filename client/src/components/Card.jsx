@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { UserContext } from "../App";
+import { Link } from "react-router-dom";
 import styles from "../styles/card.module.css";
 import Paper from "@mui/material/Paper";
 import Upvote from "../svg/Upvote";
@@ -9,23 +11,116 @@ import Share_icon from "../svg/Share_icon";
 import Dotted_icon from "../svg/Dotted_icon";
 import Box from "@mui/material/Box";
 const Card = () => {
-  const data = [
-    {
-      image:
-        "https://indieseducation.b-cdn.net/wp-content/uploads/2020/05/Full-stack-1.jpg",
-      name: "Amit",
-      about: "Enginner",
-      date: new Date(),
-      question: "what is fullstack?",
-      answer:
-        "Hands down it has to be the supremely brilliant artist S. Elayaraja from Tamil Nadu, India.",
-      images: "https://cdn.wallpapersafari.com/45/48/zaZuT2.jpg",
-    },
-  ];
+  // const data = [
+  //   {
+  //     image:
+  //       "https://indieseducation.b-cdn.net/wp-content/uploads/2020/05/Full-stack-1.jpg",
+  //     name: "Amit",
+  //     about: "Enginner",
+  //     date: new Date(),
+  //     question: "what is fullstack?",
+  //     answer:
+  //       "Hands down it has to be the supremely brilliant artist S. Elayaraja from Tamil Nadu, India.",
+  //     images: "https://cdn.wallpapersafari.com/45/48/zaZuT2.jpg",
+  //   },
+  // ];
   const paper_card = {
     height: "auto",
   };
+  const [data, setData] = useState([]);
+  const { state, dispatch } = useContext(UserContext);
+  useEffect(() => {
+    fetch("/followingposts", {
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("jwt"),
+      },
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        console.log(result);
+        setData(result.posts);
+      });
+  }, [])
 
+  const likePost = (id)=>{
+          fetch('/upvote',{
+              method:"put",
+              headers:{
+                  "Content-Type":"application/json",
+                  "Authorization":"Bearer "+localStorage.getItem("jwt")
+              },
+              body:JSON.stringify({
+                  postId:id
+              })
+          }).then(res=>res.json())
+          .then(result=>{
+                   //   console.log(result)
+            const newData = data.map(item=>{
+                if(item._id===result._id){
+                    return result
+                }else{
+                    return item
+                }
+            })
+            setData(newData)
+          }).catch(err=>{
+             console.log('err:', err)
+             
+          })
+    }
+    const unlikePost = (id)=>{
+          fetch('/downvote',{
+              method:"put",
+              headers:{
+                  "Content-Type":"application/json",
+                  "Authorization":"Bearer "+localStorage.getItem("jwt")
+              },
+              body:JSON.stringify({
+                  postId:id
+              })
+          }).then(res=>res.json())
+          .then(result=>{
+            //   console.log(result)
+            const newData = data.map(item=>{
+                if(item._id===result._id){
+                    return result
+                }else{
+                    return item
+                }
+            })
+            setData(newData)
+          }).catch(err=>{
+          console.log('err:', err)
+        })
+  }
+  
+   const makeComment = (text,postId)=>{
+          fetch('/comment',{
+              method:"put",
+              headers:{
+                  "Content-Type":"application/json",
+                  "Authorization":"Bearer "+localStorage.getItem("jwt")
+              },
+              body:JSON.stringify({
+                  postId,
+                  text
+              })
+          }).then(res=>res.json())
+          .then(result=>{
+              //console.log(result)
+              const newData = data.map(item=>{
+                if(item._id===result._id){
+                    return result
+                }else{
+                    return item
+                }
+             })
+            setData(newData)
+          }).catch(err=>{
+              console.log('err:', err)
+              
+          })
+  }
   return (
     <Box
       sx={{

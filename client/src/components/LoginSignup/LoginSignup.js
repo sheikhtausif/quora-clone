@@ -48,8 +48,8 @@ export default function Front() {
   const [open, setOpen] = useState(false);
   const [color, setColor] = useState("white");
   const [color1, setColor1] = useState("white");
+  const [password, setPasword] = useState("");
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [sname, setSname] = useState("");
   const [semail, setSemail] = useState("");
   const [spassword, setSpassword] = useState("");
@@ -58,15 +58,11 @@ export default function Front() {
   const handleClose = () => setOpen(false);
 
   const PostData = (e) => {
-    e.preventDefault();
     if (
       !/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
         email
       )
     ) {
-      <Alert variant="filled" severity="error">
-        Please Add Valid Inputs
-      </Alert>;
       history.push("/");
       return;
     }
@@ -82,23 +78,17 @@ export default function Front() {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         if (data.error) {
-          <Alert variant="filled" severity="error">
-            This is an error alert — check it out!
-          </Alert>;
+          console.log("dataERR:", data);
         } else {
           localStorage.setItem("jwt", data.token);
           localStorage.setItem("user", JSON.stringify(data.user));
           dispatch({ type: "USER", payload: data.user });
-          <Alert variant="filled" severity="success">
-            This is a success alert — check it out!
-          </Alert>;
           history.push("/");
         }
       })
       .catch((err) => {
-        console.log(err);
+        console.log("err", err);
       });
   };
 
@@ -200,7 +190,7 @@ export default function Front() {
                 className={styles.inputdiv}
                 value={password}
                 onChange={(e) => {
-                  setPassword(e.target.value);
+                  setPasword(e.target.value);
                 }}
                 type="text"
                 placeholder="Your Password"

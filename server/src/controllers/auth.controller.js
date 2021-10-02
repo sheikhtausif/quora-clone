@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 const { JWT_SECRET_KEY } = require("../keys");
-
+const bcrypt = require("bcryptjs");
 const User = require("../models/user.model");
 
 const newToken = (user) => {
@@ -8,64 +8,67 @@ const newToken = (user) => {
 };
 
 const register = async (req, res) => {
-  let user;
-  try {
-    // check if the email provided already exists in the database
-    user = await User.findOne({ email: req.body.email }).lean().exec();
-
-    if (user)
-      return res.status(400).send({
-        status: "failed",
-        message: "Please try with a different email and password",
-      });
-
-    // if no then create a user with the information provided in the request body
-    user = await User.create(req.body);
-
-    if (!user)
-      return res
-        .status(500)
-        .send({ status: "failed", message: "Please try again later" });
-
-    // create a token for that user and return it
-    const token = newToken(user);
-
-    return res.status(201).json({ token: token, user });
-  } catch (err) {
-    return res.status(500).send({ status: "failed", message: err.message });
+  const { name, email, password, pic } = req.body;
+  if (!email || !password || !name) {
+    return res.status(422).json({ error: "Please Fill All Required Fields" });
   }
+  User.findOne({ email: email })
+    .then((signedUser) => {
+      if (signedUser) {
+        return res
+          .status(422)
+          .json({ error: "This Email ID Already Registered With Us" });
+      }
+      bcrypt.hash(password, 8).then((hashedPassword) => {
+        const user = new User({
+          email,
+          password: hashedPassword,
+          name,
+          photo: pic,
+        });
+        user
+          .save()
+          .then((user) => {
+            res.status(200).json({
+              message: `${user.name} Thank you for joined Instagram Family `,
+            });
+          })
+          .catch((err) => {
+            return res.status(400).json({ err: err.message });
+          });
+      });
+    })
+    .catch((err) => {
+      console.log("err:", err);
+    });
 };
 
 const login = async (req, res) => {
-  try {
-    // if user with the email exists
-    let user = await User.findOne({ email: req.body.email }).exec();
-
-    // if not then throw an error of status code 400
-    if (!user)
-      return res.status(400).send({
-        status: "failed",
-        message: "Please try with a different email and password",
-      });
-
-    // if yes then we need to check the password
-    const match = user.checkPassword(req.body.password);
-
-    if (!match)
-      return res.status(400).send({
-        status: "failed",
-        message: "Please try with a different email and password",
-      });
-
-    // if the password match then create the token and send the token
-    const token = newToken(user);
-
-    return res.status(201).json({ token: token, user });
-  } catch (err) {
-    return res
-      .status(500)
-      .send({ status: "failed", message: "Please try again later" });
+  const { email, password } = req.body;
+  if (!email || !password) {
+    return res.status(422).json({ error: "Please Fill All Required Fields" });
   }
+  User.findOne({ email: email })
+    .then((user) => {
+      if (!user) {
+        return res.status(422).json({ error: "Invalid Email or Password" });
+      }
+      bcrypt.compare(password, user.password).then((matchedUser) => {
+        if (matchedUser) {
+          // return res.status(200).json({ message: `Welcome Again  ${user.name} `, });
+          const token = jwt.sign({ _id: user._id }, JWT_SECRET_KEY);
+          res.json({
+            token: token,
+            user: user,
+          });
+        } else {
+          return res.status(422).json({ error: "Invalid Email or Password" });
+        }
+      });
+    })
+    .catch((err) => {
+      console.log("err:", err);
+    });
 };
 
 module.exports = { register, login };

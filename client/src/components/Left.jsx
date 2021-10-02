@@ -105,20 +105,16 @@ const Left = () => {
         body: JSON.stringify({
           title,
           body,
-          pic: url,
+          photo: url,
         }),
       })
         .then((res) => res.json())
         .then((data) => {
           console.log(data);
           if (data.error) {
-            <Alert variant="filled" severity="error">
-              This is an error alert — check it out!
-            </Alert>;
+          console.log('dataEE:', data.error)
           } else {
-            <Alert variant="filled" severity="success">
-              This is a success alert — check it out!
-            </Alert>;
+            console.log('datapost:', data)
             history.push("/");
           }
         })
@@ -139,7 +135,7 @@ const Left = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        // console.log('data:', data)
+       //console.log('data:PhotoUrl', data)
         setUrl(data.url);
       })
       .catch((err) => {

@@ -7,12 +7,28 @@ const authenticate = require("../middleware/authenticate");
 const Post = require("../models/post.model");
 
 router.post("/", authenticate, async function (req, res) {
-  try {
-    const post = await Post.create(req.body);
-    return res.status(201).json({ post });
-  } catch (err) {
-    console.log("err in posting post", err);
+  const { title, body, pic } = req.body;
+  if (!title || !body || !pic) {
+    return res.status(422).json({ error: "Please Add All Required Fields" });
   }
+
+  req.user.password = undefined;
+
+  const post = new Post({
+    title,
+    body,
+    photo: pic,
+    postedBy: req.user,
+  });
+
+  post
+    .save()
+    .then((result) => {
+      res.status(200).json({ post: result });
+    })
+    .catch((err) => {
+      console.log("err:", err);
+    });
 });
 
 router.get("/", authenticate, async function (req, res) {
@@ -44,7 +60,7 @@ router.get("/myposts", authenticate, async function (req, res) {
 router.get("/followingposts", authenticate, function (req, res) {
   // if postedBy in following list by $in
   Post.find({ postedBy: { $in: req.user.following } })
-    .populate("postedBy", "_id name pic")
+    .populate("postedBy", "_id name photo")
     .populate("comments.postedBy", "_id name")
     .sort("-createdAt")
     .then((posts) => {
