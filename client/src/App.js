@@ -27,6 +27,7 @@ const Routing = () => {
         setTheme(!theme);
     };
 
+    // eslint-disable-next-line
     const { state, dispatch } = useContext(UserContext);
     useEffect(() => {
         const user = JSON.parse(localStorage.getItem("user"));
@@ -35,6 +36,7 @@ const Routing = () => {
         } else {
             history.push("/registerr");
         }
+        // eslint-disable-next-line
     }, []);
 
     return (

@@ -40,6 +40,7 @@ const CreatePost = () => {
                     console.log(err);
                 });
         }
+        // eslint-disable-next-line
     }, [url]);
 
     const postDetails = () => {

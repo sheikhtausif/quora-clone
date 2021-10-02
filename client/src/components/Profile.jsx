@@ -1,68 +1,150 @@
 import React from 'react'
 import { useState } from 'react'
 import styles from '../styles/profile.module.css'
+import Modal from '@material-ui/core/Modal';
+import Box from '@mui/material/Box';
+import { GrClose } from 'react-icons/gr';
 
 const Profile = () => {
-    const [profile, setProfile] = useState(true)
-    const [ques, setQues] = useState(false)
-    const [ans, setAns] = useState(false)
-    const [post, setPost] = useState(false)
+    const [profileA, setProfileA] = useState(true)
+    const [quesA, setQuesA] = useState(false)
+    const [ansA, setAnsA] = useState(false)
+    const [postA, setPostA] = useState(false)
+    const [followingA, setFollowingA] = useState(false)
+    const [followersA, setFollowersA] = useState(false)
+    const [followText, setFollowText] = useState("")
+    const [profileText, setProfileText] = useState("Profile")
 
-    const handleActivePro = () => {
-        setProfile(true)
-        setQues(false)
-        setAns(false)
-        setPost(false)
+    const [open, setOpen] = useState(false);
+    const handleOpen = (text) => {
+        setOpen(true)
+        if (text === "Following") {
+            setFollowingA(true)
+            setFollowText(text)
+        }
+        else {
+            setFollowersA(true)
+            setFollowText(text)
+        }
     }
-    const handleActiveAns = () => {
-        setProfile(false)
-        setQues(false)
-        setAns(true)
-        setPost(false)
+    const handleClose = () => {
+        setOpen(false)
+        setFollowersA(false)
+        setFollowingA(false)
+    };
+
+    const handleActivePro = (text) => {
+        setProfileA(true)
+        setQuesA(false)
+        setAnsA(false)
+        setPostA(false)
+        setProfileText(text)
     }
-    const handleActiveQue = () => {
-        setProfile(false)
-        setQues(true)
-        setAns(false)
-        setPost(false)
+    const handleActiveAns = (text) => {
+        setProfileA(false)
+        setQuesA(false)
+        setAnsA(true)
+        setPostA(false)
+        setProfileText(text)
     }
-    const handleActivePost = () => {
-        setProfile(false)
-        setQues(false)
-        setAns(false)
-        setPost(true)
+    const handleActiveQue = (text) => {
+        setProfileA(false)
+        setQuesA(true)
+        setAnsA(false)
+        setPostA(false)
+        setProfileText(text)
     }
+    const handleActivePost = (text) => {
+        setProfileA(false)
+        setQuesA(false)
+        setAnsA(false)
+        setPostA(true)
+        setProfileText(text)
+    }
+
+    const handleActiveFollowers = (text) => {
+        setFollowingA(true)
+        setFollowersA(false)
+        setFollowText(text)
+    }
+    const handleActiveFollowing = (text) => {
+        setFollowingA(false)
+        setFollowersA(true)
+        setFollowText(text)
+    }
+
+    const style = {
+        position: 'absolute',
+        top: '40%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        width: '42%',
+        height: "inherit",
+        backgroundColor: 'white',
+        borderRadius: '10px',
+        boxShadow: 24,
+        outline: 'none',
+        padding: "20px"
+    };
 
     return (
-        <div className={styles.main_part}>
-            <div className={styles.main_profile}>
-                <div className={styles.profile_img}>
-                    <span>T</span>
-                </div>
-                <div>
-                    <h1>Mohd Tausif</h1>
+        <>
+            <div className={styles.main_part}>
+                <div className={styles.main_profile}>
+                    <div className={styles.profile_img}>
+                        <span>M</span>
+                    </div>
                     <div>
-                        <p>0 followers</p>
-                        <p>0 following</p>
+                        <h1>Mohd Tausif</h1>
+                        <div>
+                            <p onClick={() => handleOpen('Followers')}>0 followers</p>
+                            <p onClick={() => handleOpen('Following')}>0 following</p>
+                        </div>
+                    </div>
+                </div>
+                <div className={styles.profile_details}>
+                    <p onClick={() => handleActivePro("Profile")} style={profileA ? { borderBottom: '3.4px solid #A82723' } : { borderBottom: '3.4px solid #fff' }}>Profile</p>
+                    <p onClick={() => handleActiveQue("Questions")} style={quesA ? { borderBottom: '3.4px solid #A82723' } : { borderBottom: '3.4px solid #fff' }}>0 Questions</p>
+                    <p onClick={() => handleActiveAns("Answers")} style={ansA ? { borderBottom: '3.4px solid #A82723' } : { borderBottom: '3.4px solid #fff' }}>0 Answers</p>
+                    <p onClick={() => handleActivePost("Posts")} style={postA ? { borderBottom: '3.4px solid #A82723' } : { borderBottom: '3.4px solid #fff' }}>0 Posts</p>
+                </div>
+                <hr />
+                <h5>{profileText}</h5>
+                <hr />
+                <div className={styles.activity_div}>
+                    <div>
+                        <img className={styles} src="//qsf.fs.quoracdn.net/-4-ans_frontend_assets.images.empty_states.dormant_lightmode.png-26-c4532c98034818a0.png" alt="images"></img>
+                        <p>You haven't shared, answered or posted anything yet.</p>
                     </div>
                 </div>
             </div>
-            <div className={styles.profile_details}>
-                <p onClick={handleActivePro} style={profile ? { borderBottom: '3.4px solid #A82723' } : { borderBottom: '3.4px solid #fff' }}>Profile</p>
-                <p onClick={handleActiveQue} style={ques ? { borderBottom: '3.4px solid #A82723' } : { borderBottom: '3.4px solid #fff' }}>0 Questions</p>
-                <p onClick={handleActiveAns} style={ans ? { borderBottom: '3.4px solid #A82723' } : { borderBottom: '3.4px solid #fff' }}>0 Answers</p>
-                <p onClick={handleActivePost} style={post ? { borderBottom: '3.4px solid #A82723' } : { borderBottom: '3.4px solid #fff' }}>0 Posts</p>
-            </div>
-            <hr />
-            <h5>Profile</h5>
-            <hr />
-            <div className={styles.activity_div}>
-                <div>
-                    <img className={styles} src="//qsf.fs.quoracdn.net/-4-ans_frontend_assets.images.empty_states.dormant_lightmode.png-26-c4532c98034818a0.png" alt="images"></img>
-                    <p>You haven't shared, answered or posted anything yet.</p>
-                </div>
-            </div>
-        </div>
+
+            <Modal
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description">
+                <Box sx={style}>
+                    <div className={styles.close}>
+                        <GrClose onClick={handleClose} />
+                        <p>Mohd Tausif</p>
+                    </div>
+                    <div className={styles.follow_details}>
+                        <p onClick={() => handleActiveFollowing("Followers")} style={followersA ? { borderBottom: '3.4px solid #A82723' } : { borderBottom: '3.4px solid #fff' }}>0 Followers</p>
+                        <p onClick={() => handleActiveFollowers("Following")} style={followingA ? { borderBottom: '3.4px solid #A82723' } : { borderBottom: '3.4px solid #fff' }}>0 Following</p>
+                    </div>
+                    <hr />
+                    <h5>{followText}</h5>
+                    <hr />
+                    <div className={styles.activity_div}>
+                        <div>
+                            <img className={styles} src="//qsf.fs.quoracdn.net/-4-ans_frontend_assets.images.empty_states.dormant_lightmode.png-26-c4532c98034818a0.png" alt="images"></img>
+                            <p>{followersA ? "You don't have followers yet" : "You aren't following anyone yet."}</p>
+                        </div>
+                    </div>
+                </Box>
+            </Modal>
+        </>
     )
 }
 
