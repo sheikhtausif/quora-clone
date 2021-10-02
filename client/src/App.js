@@ -15,29 +15,23 @@ const App = () => {
         setTheme(!theme)
     }
     return (
-        
+
         <div className="App" styles={!theme ? { color: "#fff", background: "black" } : ""}>
-            
+
             <Switch>
                 <Route exact path='/'>
-                <Navbar handleTheme={handleTheme} />
+                    <Navbar handleTheme={handleTheme} />
                     <Main />
                 </Route>
                 <Route exact path='/register'>
-                    <Front/>
+                    <Front />
                 </Route>
                 <Route exact path='/profile'>
-                <Navbar handleTheme={handleTheme} />
-                    <Profile/>
+                    <Navbar handleTheme={handleTheme} />
+                    <Profile />
                 </Route>
             </Switch>
         </div>
-
-        
-       
-
-
-       
     )
 }
 
