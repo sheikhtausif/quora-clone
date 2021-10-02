@@ -12,23 +12,23 @@ import DottedIcon from "../svg/Dotted_icon";
 import Box from "@mui/material/Box";
 
 const Card = () => {
-    // const data = [
-    //   {
-    //     image:
-    //       "https://indieseducation.b-cdn.net/wp-content/uploads/2020/05/Full-stack-1.jpg",
-    //     name: "Amit",
-    //     about: "Enginner",
-    //     date: new Date(),
-    //     question: "what is fullstack?",
-    //     answer:
-    //       "Hands down it has to be the supremely brilliant artist S. Elayaraja from Tamil Nadu, India.",
-    //     images: "https://cdn.wallpapersafari.com/45/48/zaZuT2.jpg",
-    //   },
-    // ];
+    const data = [
+      {
+        image:
+          "https://indieseducation.b-cdn.net/wp-content/uploads/2020/05/Full-stack-1.jpg",
+        name: "Amit",
+        about: "Enginner",
+        date: new Date(),
+        question: "what is fullstack?",
+        answer:
+          "Hands down it has to be the supremely brilliant artist S. Elayaraja from Tamil Nadu, India.",
+        images: "https://cdn.wallpapersafari.com/45/48/zaZuT2.jpg",
+      },
+    ];
     const paper_card = {
         height: "auto",
     };
-    const [data, setData] = useState([]);
+    const [datas, setData] = useState([]);
     const { state, dispatch } = useContext(UserContext);
     useEffect(() => {
         fetch("/followingposts", {
