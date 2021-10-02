@@ -24,7 +24,7 @@ const register = async (req, res) => {
           email,
           password: hashedPassword,
           name,
-          pic,
+          photo: pic,
         });
         user
           .save()

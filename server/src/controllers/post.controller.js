@@ -60,7 +60,7 @@ router.get("/myposts", authenticate, async function (req, res) {
 router.get("/followingposts", authenticate, function (req, res) {
   // if postedBy in following list by $in
   Post.find({ postedBy: { $in: req.user.following } })
-    .populate("postedBy", "_id name pic")
+    .populate("postedBy", "_id name photo")
     .populate("comments.postedBy", "_id name")
     .sort("-createdAt")
     .then((posts) => {
