@@ -12,6 +12,7 @@ const SecondMiddle = () => {
 
     const [openQ, setOpenQ] = useState(false);
 
+    const user=JSON.parse(localStorage.getItem("user"))
     const handleOpenQ = () => setOpenQ(true);
     const handleCloseQ = () => setOpenQ(false);
 
@@ -28,7 +29,7 @@ const SecondMiddle = () => {
                                 src="https://images.unsplash.com/photo-1518806118471-f28b20a1d79d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80"
                                 alt=""
                             />
-                            <p>Amit Mehta</p>
+                            <p>{user.name}</p>
                         </div>
                         <div className={styles.questionasked}>
                             <h4>What is your question or link?</h4>

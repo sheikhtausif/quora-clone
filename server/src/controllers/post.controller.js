@@ -71,7 +71,7 @@ router.get("/followingposts", authenticate, function (req, res) {
 });
 
 router.put("/upvote", authenticate, (req, res) => {
-  console.log("reqaisehi", req.user.user._id, req.body);
+  console.log("req:", req.body);
   Post.findByIdAndUpdate(
     req.body.postId,
     {
@@ -80,15 +80,17 @@ router.put("/upvote", authenticate, (req, res) => {
     {
       new: true,
     }
-  ).exec((err, result) => {
-    console.log("err:", err);
-    console.log("result:", result);
-    if (err) {
-      return res.status(422).json({ error: err });
-    } else {
-      res.json(result);
-    }
-  });
+  )
+    .populate("comments.postedBy", "_id name")
+    .populate("postedBy", "_id name")
+    .exec((err, result) => {
+      if (err) {
+        return res.status(422).json({ error: err });
+      } else {
+        //console.log(result);
+        res.json(result);
+      }
+    });
 });
 router.put("/downvote", authenticate, (req, res) => {
   Post.findByIdAndUpdate(
@@ -100,9 +102,9 @@ router.put("/downvote", authenticate, (req, res) => {
       new: true,
     }
   )
+    .populate("comments.postedBy", "_id name")
     .populate("postedBy", "_id name")
     .exec((err, result) => {
-      console.log("result:", result);
       if (err) {
         return res.status(422).json({ error: err });
       } else {

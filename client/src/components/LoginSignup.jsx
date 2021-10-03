@@ -113,7 +113,7 @@ export default function Front() {
         if (!/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email2)
         ) {
             console.log("email", email2);
-            alert("Invalid Details");
+            alert("Please Add Valid Inputs");
             return;
         }
         fetch("http://localhost:8000/register", {
@@ -147,7 +147,7 @@ export default function Front() {
         e.preventDefault();
         if (// eslint-disable-next-line
             !/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email)) {
-            alert("please fill correct details")
+            alert("Please Add Valid Inputs")
             return;
         }
         fetch("http://localhost:8000/login", {

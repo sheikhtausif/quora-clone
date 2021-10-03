@@ -44,7 +44,7 @@ const Card = () => {
             })
         }).then(res => res.json())
           .then(result => {
-                const newData = data.map(item => {
+                const newData = posts.map(item => {
                   if (item._id === result._id) {
                         return result
                   } else {
@@ -69,9 +69,8 @@ const Card = () => {
                 postId: id
             })
         }).then(res => res.json())
-            .then(result => {
-                 
-                const newData = data.map(item => {
+            .then(result => {        
+                const newData = posts.map(item => {
                   if (item._id === result._id) {
                        console.log(result)
                         return result
@@ -170,7 +169,7 @@ const Card = () => {
                                 <div className={styles.cardlast_section}>
                                     <div className={styles.vote}>
                                         <button className={styles.button_upvoted} onClick={() => {
-                                            likePost(el?.postedBy?.id ? el.postedBy.id: current_user._id);
+                                            likePost(el._id);
                                         }}>
                                             <Upvote />
                                             <p>12.4k</p>
@@ -178,7 +177,7 @@ const Card = () => {
 
                                         <button className={styles.button_voted}
                                             onClick={() => {
-                                                unlikePost(el?.postedBy?.id ? el.postedBy.id: current_user._id);
+                                                unlikePost(el._id);
                                             }}>
                                             <Downvote />
                                         </button>
