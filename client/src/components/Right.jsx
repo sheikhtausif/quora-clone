@@ -3,8 +3,9 @@ import styles from "../styles/right.module.css";
 import Paper from "@mui/material/Paper";
 
 const paper_style = {
-    height: "auto",
-    width: "100%",
+  height: "auto",
+  width: "100%",
+ 
 
 };
 const Right = () => {
