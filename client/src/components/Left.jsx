@@ -7,9 +7,10 @@ import Fade from "@mui/material/Fade";
 import Button from "@mui/material/Button";
 import { useHistory } from "react-router-dom";
 import TextField from "@mui/material/TextField";
-// eslint-disable-next-line
-import Alert from "@mui/material/Alert";
-import Footer from "./Footer";
+import { useDispatch } from 'react-redux'
+import { addPost } from '../ReduxStore/App/actions'
+// import axios from 'axios'
+
 
 const style = {
     position: "absolute",
@@ -30,6 +31,10 @@ const textfields = {
     width: "500",
     maxWidth: "100%",
 };
+
+const upload_button = {
+    backgroundColor: "#2E69FF"
+}
 
 const rightData = [
     {
@@ -87,62 +92,35 @@ const rightData = [
 ];
 
 const Left = () => {
-    const [open, setOpen] = React.useState(false);
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
     const history = useHistory();
+    const dispatch = useDispatch()
+    const [open, setOpen] = React.useState(false);
     const [title, setTitle] = useState("");
     const [body, setBody] = useState("");
     const [image, setImage] = useState("");
-    const [url, setUrl] = useState("");
-    useEffect(() => {
-        if (url) {
-            fetch("http://localhost:8000/posts", {
-                method: "post",
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: "Bearer " + localStorage.getItem("jwt"),
-                },
-                body: JSON.stringify({
-                    title,
-                    body,
-                    photo: url,
-                }),
-            })
-                .then((res) => res.json())
-                .then((data) => {
-                    console.log(data);
-                    if (data.error) {
-                        console.log('dataEE:', data.error)
-                    } else {
-                        console.log('datapost:', data)
-                        history.push("/");
-                    }
-                })
-                .catch((err) => {
-                    console.log("amit", err);
-                });
-        }
-        // eslint-disable-next-line
-    }, [url]);
+
+    const handleClose = () => setOpen(false);
+    const handleOpen = () => setOpen(true);
 
     const postDetails = () => {
         const data = new FormData();
         data.append("file", image);
         data.append("upload_preset", "miniinsta");
         data.append("cloud_name", "rsbrsb");
-        fetch("	https://api.cloudinary.com/v1_1/rsbrsb/image/upload", {
+        fetch("https://api.cloudinary.com/v1_1/rsbrsb/image/upload", {
             method: "post",
             body: data,
-        })
-            .then((res) => res.json())
-            .then((data) => {
-                console.log('data:PhotoUrl', data)
-                setUrl(data.url);
-            })
-            .catch((err) => {
-                console.log("err:", err);
-            });
+        }).then((res) => res.json()).then((data) => {
+            console.log("data:PhotoUrl", data);
+            const { url } = data
+            if (url) {
+                dispatch(addPost({ title, body, url }))
+                history.push('/')
+            }
+        }).catch((err) => {
+            console.log("err:", err);
+        });
+        setOpen(false);
     };
     return (
         <div className={styles.left_space}>
@@ -211,7 +189,7 @@ const Left = () => {
                                             />
 
                                             <Button
-                                                color="secondary"
+                                                sx={upload_button}
                                                 variant="contained"
                                                 component="span"
                                             >
@@ -234,7 +212,7 @@ const Left = () => {
 
             {rightData.map((el, i) => {
                 return (
-                    <div key={i} className={styles.space_catogery}>
+                    <div className={styles.space_catogery} key={i}>
                         <div>
                             <img
                                 className={styles.space_catogery_image}
@@ -254,7 +232,14 @@ const Left = () => {
             <hr className={styles.space_catogery_hr} />
 
             <div className={styles.space_catogery_footer}>
-                <Footer />
+                <p>About</p>
+                <p>Careers</p>
+                <p>Terms</p>
+                <p>Privacy</p>
+                <p>Acceptable Use</p>
+                <p>Business</p>
+                <p>Press</p>
+                <p>Your Ad Choices</p>
             </div>
         </div>
     );

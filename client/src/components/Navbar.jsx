@@ -88,7 +88,7 @@ const Navbar = ({ handleTheme }) => {
                 <p onClick={() => {
                     localStorage.clear()
                     dispatch({ type: "CLEAR" })
-                    history.push('/registerr')
+                    history.push('/register')
                 }}>Logout</p>
             </div>
             <div className={styles.footer}>

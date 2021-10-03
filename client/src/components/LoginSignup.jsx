@@ -1,7 +1,7 @@
-import styles from "../../styles/login.module.css";
+import styles from "../styles/login.module.css";
 import React, { useState, useContext, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import { UserContext } from "../../App";
+import { UserContext } from "../App";
 import { styled, Box } from "@mui/system";
 import ModalUnstyled from "@mui/core/ModalUnstyled";
 import ClearIcon from "@mui/icons-material/Clear";
@@ -110,10 +110,7 @@ export default function Front() {
     };
 
     const uploadFields = () => {
-        if (
-            !/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
-                email2
-            )
+        if (!/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email2)
         ) {
             console.log("email", email2);
             alert("Invalid Details");
@@ -138,7 +135,7 @@ export default function Front() {
                 } else {
                     console.log("dataSign:", data);
                     setOpen(false);
-                    // history.push("/registerr");
+                    // history.push("/register");
                 }
             })
             .catch((err) => {
@@ -148,13 +145,9 @@ export default function Front() {
 
     const PostData = (e) => {
         e.preventDefault();
-        if (
-            // eslint-disable-next-line
-            !/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
-                email
-            )
-        ) {
-            history.push("/");
+        if (// eslint-disable-next-line
+            !/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email)) {
+            alert("please fill correct details")
             return;
         }
         fetch("http://localhost:8000/login", {

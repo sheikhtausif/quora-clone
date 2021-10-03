@@ -1,5 +1,5 @@
 const express = require("express");
-const Mongoose = require("mongoose");
+const mongoose = require("mongoose");
 const router = express.Router();
 
 const authenticate = require("../middleware/authenticate");
@@ -7,6 +7,7 @@ const authenticate = require("../middleware/authenticate");
 const Post = require("../models/post.model");
 
 router.post("/", authenticate, async function (req, res) {
+  console.log(req.body);
   try {
     const { title, body, photo } = req.body;
     if (!title || !body || !photo) {
@@ -22,6 +23,7 @@ router.post("/", authenticate, async function (req, res) {
       postedBy: req.user.user,
     };
     const post2 = await Post.create(post);
+    console.log("post2:", post2);
     return res.status(201).json({ post2 });
   } catch (err) {
     res.status(404).json({ err2: err.message });
@@ -36,7 +38,7 @@ router.get("/", authenticate, async function (req, res) {
       .sort("-createdAt")
       .lean()
       .exec();
-    return res.status(200).json({ posts });
+    return res.status(200).json(posts);
   } catch (err) {
     return res.status(400).send(err.message);
   }
@@ -69,38 +71,38 @@ router.get("/followingposts", authenticate, function (req, res) {
 });
 
 router.put("/upvote", authenticate, (req, res) => {
+  console.log("reqaisehi", req.user.user._id, req.body);
   Post.findByIdAndUpdate(
     req.body.postId,
     {
-      $push: { upvotes: req.user._id },
+      $push: { upvotes: req.user.user._id },
     },
     {
       new: true,
     }
-  )
-    .populate("comments.postedBy", "_id name")
-    .populate("postedBy", "_id name")
-    .exec((err, result) => {
-      if (err) {
-        return res.status(422).json({ error: err });
-      } else {
-        res.json(result);
-      }
-    });
+  ).exec((err, result) => {
+    console.log("err:", err);
+    console.log("result:", result);
+    if (err) {
+      return res.status(422).json({ error: err });
+    } else {
+      res.json(result);
+    }
+  });
 });
 router.put("/downvote", authenticate, (req, res) => {
   Post.findByIdAndUpdate(
     req.body.postId,
     {
-      $pull: { upvotes: req.user._id },
+      $pull: { upvotes: req.user.user._id },
     },
     {
       new: true,
     }
   )
-    .populate("comments.postedBy", "_id name")
     .populate("postedBy", "_id name")
     .exec((err, result) => {
+      console.log("result:", result);
       if (err) {
         return res.status(422).json({ error: err });
       } else {
