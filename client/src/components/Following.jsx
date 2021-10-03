@@ -19,12 +19,12 @@ const Following = () => {
     const dispatch = useDispatch();
     const { posts } = useSelector(state => state.app)
 
-    const [allPost, setAllPost] = useState(posts.reverse(function (a,b){return a-b}))
+    const [allPost, setAllPost] = useState(posts.reverse(function (a, b) { return a - b }))
 
 
     useEffect(() => {
         dispatch(getPost())
-        setAllPost(posts.reverse(function (a,b){return a-b}))
+        setAllPost(posts.reverse(function (a, b) { return a - b }))
 
         setCurrentUser(JSON.parse(localStorage.getItem('user')))
     }, [dispatch, posts])
@@ -45,12 +45,12 @@ const Following = () => {
                 postId: id
             })
         }).then(res => res.json())
-          .then(result => {
+            .then(result => {
                 const newData = posts.map(item => {
-                  if (item._id === result._id) {
+                    if (item._id === result._id) {
                         return result
-                  } else {
-                     console.log(item)
+                    } else {
+                        console.log(item)
                         return item
                     }
                 })
@@ -71,10 +71,10 @@ const Following = () => {
                 postId: id
             })
         }).then(res => res.json())
-            .then(result => {        
+            .then(result => {
                 const newData = posts.map(item => {
-                  if (item._id === result._id) {
-                       console.log(result)
+                    if (item._id === result._id) {
+                        console.log(result)
                         return result
                     } else {
                         return item
@@ -112,116 +112,116 @@ const Following = () => {
                 console.log('err:', err)
 
             })
-  }
-  const main_paper_card = {
-      marginBottom: "5px",
+    }
+    const main_paper_card = {
+        marginBottom: "5px",
     }
 
 
     return (
-       <div style={{width: '38%',margin: "auto"}}>
-        <div className={styles.main_card_container}>
+        <div style={{ width: '38%', margin: "auto" }}>
+            <div className={styles.main_card_container}>
                 {allPost?.map((el, i) => {
                     return (
-                      <div key={i}>
-                        <Paper variant="outlined" square sx={main_paper_card}>
-                            <div className={styles.secondary_card_container}>
-                                <div className={styles.user_main_intro}>
-                                    <div>
-                                        <img
-                                            className={styles.main_image}
-                                            height="50"
-                                            width="50"
-                                            src={el?.postedBy?.pic ? el.postedBy.pic : current_user.pic}
-                                            alt="profileimg"
-                                        />
-                                    </div>
-
-                                    <div>
-                                        <div className={styles.user_intro}>
-                                            <h4>{el?.postedBy?.name ? el.postedBy.name : current_user.name}</h4>
-                                            <Link to="#"></Link>
+                        <div key={i}>
+                            <Paper variant="outlined" square sx={main_paper_card}>
+                                <div className={styles.secondary_card_container}>
+                                    <div className={styles.user_main_intro}>
+                                        <div>
+                                            <img
+                                                className={styles.main_image}
+                                                height="50"
+                                                width="50"
+                                                src={el?.postedBy?.pic ? el.postedBy.pic : current_user.pic}
+                                                alt="profileimg"
+                                            />
                                         </div>
 
-                                        <div className={styles.user_about_date}>
-                                            {/* <p>{el.about}</p>
+                                        <div>
+                                            <div className={styles.user_intro}>
+                                                <h3>{el?.postedBy?.name ? el.postedBy.name : current_user.name}</h3>
+                                                <Link to="#"></Link>
+                                            </div>
+
+                                            <div className={styles.user_about_date}>
+                                                {/* <p>{el.about}</p>
                                             <p>{el.date.toString().slice(0, 15)}</p> */}
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div className={styles.answer}>
+                                        <h3>{el.title}</h3>
+                                        <div>
+                                            <p>{el.body}</p>
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <div>
+                                            <img
+                                                className={styles.post_images}
+                                                src={el.photo}
+                                                alt="images"
+                                            />
                                         </div>
                                     </div>
                                 </div>
-
-                                <div className={styles.answer}>
-                                    <h3>{el.title}</h3>
-                                    <div>
-                                        <p>{el.body}</p>
-                                    </div>
-                                </div>
-
-                                <div>
-                                    <div>
-                                        <img
-                                            className={styles.post_images}
-                                            src={el.photo}
-                                            alt="images"
-                                        />
-                                    </div>
-                                </div>
-                            </div>
-                            <div className={styles.all_icons}>
-                                <div className={styles.cardlast_section}>
-                                    <div className={styles.vote}>
-                                        <button className={styles.button_upvoted} onClick={() => {
-                                            likePost(el._id);
-                                        }}>
-                                            <Upvote />
-                                            <p>12.4k</p>
-                                        </button>
-
-                                        <button className={styles.button_voted}
-                                            onClick={() => {
-                                                unlikePost(el._id);
+                                <div className={styles.all_icons}>
+                                    <div className={styles.cardlast_section}>
+                                        <div className={styles.vote}>
+                                            <button className={styles.button_upvoted} onClick={() => {
+                                                likePost(el._id);
                                             }}>
-                                            <Downvote />
-                                        </button>
+                                                <Upvote />
+                                                <p>12.4k</p>
+                                            </button>
+
+                                            <button className={styles.button_voted}
+                                                onClick={() => {
+                                                    unlikePost(el._id);
+                                                }}>
+                                                <Downvote />
+                                            </button>
+                                        </div>
+
+                                        <div className={styles.share}>
+                                            <button className={styles.button_upvoted}>
+                                                <Share />
+                                                <p>78</p>
+                                            </button>
+                                        </div>
+
+                                        <div className={styles.comments}>
+                                            <button className={styles.button_upvoted}>
+                                                <Comments />
+                                                <p>68</p>
+                                            </button>
+                                        </div>
                                     </div>
 
-                                    <div className={styles.share}>
-                                        <button className={styles.button_upvoted}>
-                                            <Share />
-                                            <p>78</p>
-                                        </button>
+                                    <div className={styles.dotted_share}>
+                                        <div className={styles.comments}>
+                                            <button className={styles.button_voted}>
+                                                <ShareIcon />
+                                            </button>
+                                        </div>
+                                        <div className={styles.comments}>
+                                            <button className={styles.button_voted}>
+                                                <DottedIcon />
+                                            </button>
+                                        </div>
                                     </div>
 
-                                    <div className={styles.comments}>
-                                        <button className={styles.button_upvoted}>
-                                            <Comments />
-                                            <p>68</p>
-                                        </button>
-                                    </div>
                                 </div>
 
-                                <div className={styles.dotted_share}>
-                                    <div className={styles.comments}>
-                                        <button className={styles.button_voted}>
-                                            <ShareIcon />
-                                        </button>
-                                    </div>
-                                    <div className={styles.comments}>
-                                        <button className={styles.button_voted}>
-                                            <DottedIcon />
-                                        </button>
-                                    </div>
-                                </div>
-                                
-                            </div>
-
-                         </Paper>
+                            </Paper>
                         </div>
                     );
                 })}
 
             </div>
-            </div>
+        </div>
     );
 };
 
