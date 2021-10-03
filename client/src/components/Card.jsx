@@ -32,6 +32,7 @@ const Card = () => {
 
 
     const likePost = (id) => {
+        //console.log('id:', id)
         fetch('http://localhost:8000/posts/upvote', {
             method: "put",
             headers: {
@@ -42,12 +43,12 @@ const Card = () => {
                 postId: id
             })
         }).then(res => res.json())
-            .then(result => {
-                //   console.log(result)
+          .then(result => {
                 const newData = data.map(item => {
-                    if (item._id === result._id) {
+                  if (item._id === result._id) {
                         return result
-                    } else {
+                  } else {
+                     console.log(item)
                         return item
                     }
                 })
@@ -69,9 +70,10 @@ const Card = () => {
             })
         }).then(res => res.json())
             .then(result => {
-                //   console.log(result)
+                 
                 const newData = data.map(item => {
-                    if (item._id === result._id) {
+                  if (item._id === result._id) {
+                       console.log(result)
                         return result
                     } else {
                         return item
@@ -109,14 +111,19 @@ const Card = () => {
                 console.log('err:', err)
 
             })
+  }
+  const main_paper_card = {
+      marginBottom: "5px",
     }
+
 
     return (
         <div className={styles.main_card_container}>
-            <Paper variant="outlined" square>
+            
                 {allPost?.map((el, i) => {
                     return (
-                        <div key={i}>
+                      <div key={i}>
+                        <Paper variant="outlined" square sx={main_paper_card}>
                             <div className={styles.secondary_card_container}>
                                 <div className={styles.user_main_intro}>
                                     <div>
@@ -124,14 +131,14 @@ const Card = () => {
                                             className={styles.main_image}
                                             height="50"
                                             width="50"
-                                            src={current_user.pic}
+                                            src={el?.postedBy?.pic ? el.postedBy.pic : current_user.pic}
                                             alt="profileimg"
                                         />
                                     </div>
 
                                     <div>
                                         <div className={styles.user_intro}>
-                                            <h4>{current_user.name}</h4>
+                                            <h4>{el?.postedBy?.name ? el.postedBy.name : current_user.name}</h4>
                                             <Link to="#">Follow</Link>
                                         </div>
 
@@ -163,7 +170,7 @@ const Card = () => {
                                 <div className={styles.cardlast_section}>
                                     <div className={styles.vote}>
                                         <button className={styles.button_upvoted} onClick={() => {
-                                            likePost(current_user._id);
+                                            likePost(el?.postedBy?.id ? el.postedBy.id: current_user._id);
                                         }}>
                                             <Upvote />
                                             <p>12.4k</p>
@@ -171,7 +178,7 @@ const Card = () => {
 
                                         <button className={styles.button_voted}
                                             onClick={() => {
-                                                unlikePost(current_user._id);
+                                                unlikePost(el?.postedBy?.id ? el.postedBy.id: current_user._id);
                                             }}>
                                             <Downvote />
                                         </button>
@@ -204,12 +211,14 @@ const Card = () => {
                                         </button>
                                     </div>
                                 </div>
+                                
                             </div>
+
+                         </Paper>
                         </div>
                     );
                 })}
 
-            </Paper>
         </div>
     );
 };
