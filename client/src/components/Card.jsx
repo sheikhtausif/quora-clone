@@ -15,9 +15,9 @@ import { getPost } from '../ReduxStore/App/actions'
 const Card = () => {
 
     const [current_user, setCurrentUser] = useState(null);
-    const [upvote,setUpvote] = useState(false);
+    const [upvote, setUpvote] = useState(false);
 
-  const [val,setVal]= useState(false)
+    const [val, setVal] = useState(false)
     const dispatch = useDispatch();
     const { posts } = useSelector(state => state.app)
 
@@ -45,13 +45,13 @@ const Card = () => {
                 postId: id
             })
         }).then(res => res.json())
-          .then(result => {
+            .then(result => {
                 const newData = posts.map(item => {
-                  if (item._id === result._id) {
-                    //console.log("result",result)
+                    if (item._id === result._id) {
+                        //console.log("result",result)
                         return result
-                  } else {
-                    //  console.log(item)
+                    } else {
+                        //  console.log(item)
                         return item
                     }
                 })
@@ -72,10 +72,10 @@ const Card = () => {
                 postId: id
             })
         }).then(res => res.json())
-            .then(result => {        
+            .then(result => {
                 const newData = posts.map(item => {
-                  if (item._id === result._id) {
-                       console.log(result)
+                    if (item._id === result._id) {
+                        console.log(result)
                         return result
                     } else {
                         return item
@@ -113,22 +113,22 @@ const Card = () => {
                 console.log('err:', err)
 
             })
-  }
-  const main_paper_card = {
-      marginBottom: "5px",
-  }
-  const handleFollow = () => {
-      setVal(!val)
-  }
+    }
+    const main_paper_card = {
+        marginBottom: "5px",
+    }
+    const handleFollow = () => {
+        setVal(!val)
+    }
 
 
     return (
         <div className={styles.main_card_container}>
-            
-                {allPost?.map((el, i) => {
-                    //console.log('el:', el)
-                    return (
-                      <div key={i}>
+
+            {allPost?.map((el, i) => {
+                //console.log('el:', el)
+                return (
+                    <div key={i}>
                         <Paper variant="outlined" square sx={main_paper_card}>
                             <div className={styles.secondary_card_container}>
                                 <div className={styles.user_main_intro}>
@@ -145,7 +145,7 @@ const Card = () => {
                                     <div>
                                         <div className={styles.user_intro}>
                                             <h3>{el?.postedBy?.name ? el.postedBy.name : current_user.name}</h3>
-                                  <button style={{ background: "none", border: "none" }} onClick={() => handleFollow()}>{ val?"Unfollow":"Follow"}</button>
+                                            <button style={{ background: "none", border: "none" }} onClick={() => handleFollow()}>{val ? "Unfollow" : "Follow"}</button>
                                         </div>
 
                                         <div className={styles.user_about_date}>
@@ -176,11 +176,11 @@ const Card = () => {
                                 <div className={styles.cardlast_section}>
                                     <div className={styles.vote}>
                                         <button className={styles.button_upvoted} onClick={() => {
-                                                likePost(el._id);
-                                                setUpvote(!upvote)
+                                            likePost(el._id);
+                                            setUpvote(!upvote)
                                         }}>
-                                            <Upvote upvote={upvote}/>
-                                            <p>{el?.upvotes?.length ?el.upvotes.length:"0"}</p>
+                                            <Upvote upvote={upvote} />
+                                            <p>{el?.upvotes?.length ? el.upvotes.length : "0"}</p>
                                         </button>
 
                                         <button className={styles.button_voted}
@@ -218,13 +218,13 @@ const Card = () => {
                                         </button>
                                     </div>
                                 </div>
-                                
+
                             </div>
 
-                         </Paper>
-                        </div>
-                    );
-                })}
+                        </Paper>
+                    </div>
+                );
+            })}
 
         </div>
     );

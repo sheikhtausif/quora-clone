@@ -1,5 +1,5 @@
 import React from 'react'
-import { useState,useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import styles from '../styles/profile.module.css'
 import styled from "../styles/card.module.css";
 import Modal from '@material-ui/core/Modal';
@@ -15,18 +15,18 @@ const Profile = () => {
     const [followersA, setFollowersA] = useState(false)
     const [followText, setFollowText] = useState("")
     const [profileText, setProfileText] = useState("Profile")
-      const [mypics,setPics]=useState([])
-     
+    const [mypics, setPics] = useState([])
 
-     useEffect(()=>{
-       fetch('http://localhost:8000/posts/myposts',{
-           headers:{
-               "Authorization":"Bearer "+localStorage.getItem("jwt")
-           }
-       }).then(res=>res.json())
-       .then(result=>{
-           setPics(result.posts)
-       })
+
+    useEffect(() => {
+        fetch('http://localhost:8000/posts/myposts', {
+            headers: {
+                "Authorization": "Bearer " + localStorage.getItem("jwt")
+            }
+        }).then(res => res.json())
+            .then(result => {
+                setPics(result.posts)
+            })
     }, [mypics])
 
     const [open, setOpen] = useState(false);
@@ -100,8 +100,8 @@ const Profile = () => {
         outline: 'none',
         padding: "20px"
     };
-     const user=JSON.parse(localStorage.getItem("user"))
-    const userFName=(user?user.name:"UK").split("")
+    const user = JSON.parse(localStorage.getItem("user"))
+    const userFName = (user ? user.name : "UK").split("")
     //console.log('userFName:', userFName)
 
     // let following = Math.floor(Math.random() * 100);
@@ -115,9 +115,9 @@ const Profile = () => {
                         <span>{userFName[0]}</span>
                     </div>
                     <div>
-                        <h1>{user?user.name:"A"}</h1>
+                        <h1>{user ? user.name : "A"}</h1>
                         <div>
-                            <p style={{marginRight:"30px"}} onClick={() => handleOpen('Followers')}>12 followers</p>
+                            <p style={{ marginRight: "30px" }} onClick={() => handleOpen('Followers')}>12 followers</p>
                             <p onClick={() => handleOpen('Following')}>7 following</p>
                         </div>
                     </div>
@@ -130,26 +130,24 @@ const Profile = () => {
                 </div>
                 <hr />
                 <h5>{profileText}</h5>
-                <hr/>
-                <div  >
-               {
-                   mypics.map((item,i)=>{
-                       return(
-                           <div style={{marginTop:"10px"}} key={i}>
-                               <h3>{item.title}</h3>
-                               <p>{item.body}</p>
-                            <img className={styled.post_images} src={item.photo} alt="images" />
-                        </div>  
-                       )
-                   })
-               }
-            </div>
-                <div className={styles.activity_div}>
-                    <div>
-                        <img className={styles} src="//qsf.fs.quoracdn.net/-4-ans_frontend_assets.images.empty_states.dormant_lightmode.png-26-c4532c98034818a0.png" alt="images"></img>
-                        <p>You haven't shared, answered or posted anything yet.</p>
-                    </div>
+                <hr />
+                {mypics ? <div>
+                    {mypics.map((item, i) => {
+                        return (
+                            <div style={{ marginTop: "10px" }} key={i}>
+                                <h3>{item.title}</h3>
+                                <p>{item.body}</p>
+                                <img className={styled.post_images} src={item.photo} alt="images" />
+                            </div>
+                        )
+                    })}
                 </div>
+                    : <div className={styles.activity_div}>
+                        <div>
+                            <img className={styles} src="//qsf.fs.quoracdn.net/-4-ans_frontend_assets.images.empty_states.dormant_lightmode.png-26-c4532c98034818a0.png" alt="images"></img>
+                            <p>You haven't shared, answered or posted anything yet.</p>
+                        </div>
+                    </div>}
             </div>
 
             <Modal

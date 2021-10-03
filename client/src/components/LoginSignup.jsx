@@ -186,8 +186,8 @@ export default function Front() {
                     .then((res) => res.json())
                     .then((data) => {
                         if (data.error) {
-                          alert(data.error);
-                    return
+                            alert(data.error);
+                            return
                         } else {
                             localStorage.setItem("jwt", data.token);
                             localStorage.setItem("user", JSON.stringify(data.user));
@@ -241,7 +241,7 @@ export default function Front() {
                             style={{ marginTop: "10px", backgroundColor: `${color}` }}
                             className={styles.googleDiv}
                         >
-                            <SiFacebook style={{ fontSize: "23px", color: "blue" }} />
+                            <SiFacebook style={{ fontSize: "23px", color: "#0B82ED" }} />
                             <h4 style={{ fontWeight: "lighter" }}>Continue with Facebook</h4>
                         </div>
                         <button
