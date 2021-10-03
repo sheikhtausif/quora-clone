@@ -5,29 +5,26 @@ const authenticate = require("../middleware/authenticate");
 const Question = require("../models/question.model");
 
 router.post("", authenticate, async function (req, res) {
-    console.log(req.body);
-    // const { question } = req.body;
-    // console.log('question:', question)
-    // if (!question) {
-    //     return res.status(422).json({ error: "Please Add All Required Fields" });
-    // }
+    const { question } = req.body;
+    console.log('question:', question)
+    if (!question) {
+        return res.status(422).json({ error: "Please Add All Required Fields" });
+    }
 
+    req.user.user.password = undefined;
 
-    // req.user.password = undefined;
+    const post = new Question({
+        question,
+        postedBy: req.user.user,
+    });
 
-    // const post = new Post({
-    //     question,
-    //     postedBy: req.user,
-    // });
-
-    // post
-    //     .save()
-    //     .then((result) => {
-    //         res.status(200).json({ post: result });
-    //     })
-    //     .catch((err) => {
-    //         console.log("err:", err);
-    //     });
+    post.save()
+        .then((result) => {
+            res.status(200).json({ post: result });
+        })
+        .catch((err) => {
+            console.log("err:", err);
+        });
 });
 
 router.get("", authenticate, async function (req, res) {
@@ -56,7 +53,7 @@ router.get("/myquestions", authenticate, async function (req, res) {
 });
 router.get("/followingposts", authenticate, function (req, res) {
     // if postedBy in following list by $in
-    Post.find({ postedBy: { $in: req.user.following } })
+    Post.find({ postedBy: { $in: req.user.user.following } })
         .populate("postedBy", "_id name pic")
         .populate("comments.postedBy", "_id name")
         .sort("-createdAt")
