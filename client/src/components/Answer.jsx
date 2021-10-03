@@ -3,7 +3,8 @@ import { useEffect } from 'react'
 import styles from "../styles/answers.module.css"
 import { useDispatch, useSelector } from 'react-redux'
 import { getQuestion } from '../ReduxStore/App/actions'
-
+import AnswerQ from '../svg/AnswerQ'
+import StarQ from '../svg/StarQ'
 
 const Answer = () => {
 
@@ -18,11 +19,26 @@ const Answer = () => {
     return (
         <div>
             <div className={styles.main_part}>
-                <h5>Answers</h5>
+                <div className={styles.ques}>
+                    <StarQ />
+                    <p>Question for you</p>
+                </div>
                 <hr />
                 {questions ?
-                    <div className={styles.answers}>
-
+                    <div>
+                        {questions.map((el, i) => (
+                            <div key={i}>
+                                <div className={styles.answers}>
+                                    <h2>{el.question}</h2>
+                                    <h4>No answer yet</h4>
+                                    <div className={styles.ans}>
+                                        <AnswerQ />
+                                        <p>Answer</p>
+                                    </div>
+                                </div>
+                                <hr />
+                            </div>
+                        ))}
                     </div>
                     : <div >
                         <div className={styles.answers_img}>
@@ -30,7 +46,6 @@ const Answer = () => {
                             <p>You haven't any answers yet.</p>
                         </div>
                     </div>}
-                <hr />
             </div>
         </div>
     )
