@@ -7,6 +7,8 @@ import { useState } from "react";
 import ClearIcon from '@mui/icons-material/Clear';
 import { FcGoogle } from "react-icons/fc"
 import { SiFacebook } from "react-icons/si"
+import M from 'materialize-css';
+import {useHistory} from "react-router-dom"
 
 
 const StyledModal = styled(ModalUnstyled)`
@@ -43,6 +45,7 @@ const style = {
 };
 
 export default function Front(){
+  const history = useHistory()
     const [open, setOpen] = useState(false);
     const [color,setColor]=useState("white")
     const [color1,setColor1]=useState("white")
@@ -82,11 +85,14 @@ export default function Front(){
       }
 
       const handleLogin=(payload)=>{
-        console.log(payload)
+
       }
-      const handleSignup=(payload)=>{
-        console.log(payload)
-      }
+
+        
+
+
+
+      
 
     return<div className={styles.container}>
         <div className={styles.container1stdiv}>
@@ -204,7 +210,7 @@ export default function Front(){
                  email:semail,
                  password:spassword
                }
-               handleSignup(payload)
+              
                setSname("")
                setSpassword("")
                setSemail("")
