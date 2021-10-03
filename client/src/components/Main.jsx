@@ -25,7 +25,7 @@ const Main = () => {
                 <Right/>
             </div> 
 
-{/* 
+            {/* 
             <CreatePost/>      */}
         </div>
     )

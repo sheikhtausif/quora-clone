@@ -1,4 +1,4 @@
-import React,{useContext,useRef,useEffect,useState} from "react";
+import React, { useContext, useState } from "react";
 import { useHistory, Link } from 'react-router-dom'
 import styles from '../styles/navbar.module.css'
 import Logo from '../svg/Logo'
@@ -18,14 +18,18 @@ import Draft from '../svg/Draft'
 import Modal from '@material-ui/core/Modal';
 import { GrNext } from 'react-icons/gr';
 import Question from './Question'
-import {UserContext} from '../App'
-// import { ReactComponent as Language } from '../svg/language.svg'
+import { UserContext } from '../App'
+import Tooltip, { tooltipClasses } from '@mui/material/Tooltip';
+import { styled } from '@mui/material/styles';
+import { Active, NoActive } from '../styles/ActiveStyled'
 
 const Navbar = ({ handleTheme }) => {
     const [open, setOpen] = useState(false);
     const [openQ, setOpenQ] = useState(false);
-       const {state,dispatch} = useContext(UserContext)
+    // eslint-disable-next-line
+    const { state, dispatch } = useContext(UserContext)
     const history = useHistory()
+    const { pathname } = history.location
 
     const handleOpenQ = () => setOpenQ(true);
     const handleCloseQ = () => setOpenQ(false);
@@ -39,10 +43,9 @@ const Navbar = ({ handleTheme }) => {
     }
 
     const nav = [
-        { icon: <Logo />, text: "", to: '/' },
         { icon: <Home />, text: "Home", to: '/' },
-        { icon: <Following />, text: "Followings", to: "following" },
-        { icon: <Answer />, text: "Answers", to: '/answers' },
+        { icon: <Following />, text: "Following", to: "/following" },
+        { icon: <Answer />, text: "Answers", to: '/answer' },
         { icon: <Space />, text: "Space", to: '/spaces' },
         { icon: <Notification />, text: "Notifications", to: '/notifications' },
     ]
@@ -58,7 +61,7 @@ const Navbar = ({ handleTheme }) => {
     const body = (
         <div className={styles.modal_body}>
             <div className={styles.profile_div}>
-                <div className={styles.profile_img}>T</div>
+                <div className={styles.profile_img}>M</div>
                 <div onClick={handleProfile}>
                     <h3>Mohd Tausif</h3>
                     <GrNext />
@@ -82,11 +85,11 @@ const Navbar = ({ handleTheme }) => {
                 <p>Settings</p>
                 <p>Languages</p>
                 <p>Help</p>
-                <p onClick={()=>{
-              localStorage.clear()
-              dispatch({type:"CLEAR"})
-              history.push('/registerr')
-            }}>Logout</p>
+                <p onClick={() => {
+                    localStorage.clear()
+                    dispatch({ type: "CLEAR" })
+                    history.push('/registerr')
+                }}>Logout</p>
             </div>
             <div className={styles.footer}>
                 <p>About</p>
@@ -101,15 +104,30 @@ const Navbar = ({ handleTheme }) => {
         </div >
     );
 
+    const LightTooltip = styled(({ className, ...props }) => (
+        <Tooltip {...props} classes={{ popper: className }} />))
+        (() => ({
+            [`& .${tooltipClasses.tooltip}`]: {
+                backgroundColor: '#fff',
+                color: 'rgba(63, 60, 60, 0.87)',
+                fontSize: 11,
+                borderRadius: "20px",
+                padding: '6px 14px',
+                border: '0.5px solid rgba(87, 79, 79, 0.87)',
+                outline: 'none',
+            },
+        }));
+
     return (
         <>
             <div className={styles.navbar}>
                 <nav className={styles.nav_flex}>
                     <div className={styles.left}>
+                        <Link to='/'><Logo /></Link>
                         {nav.map((el, i) => (
-                            <div key={i} className={styles.icons}>
-                                <Link to={el.to}>{el.icon}</Link>
-                            </div>
+                            <LightTooltip key={i} title={el.text}>
+                                {pathname === `${el.to}` ? <Active><Link to={el.to}>{el.icon}</Link></Active> : <NoActive><Link to={el.to}>{el.icon}</Link></NoActive>}
+                            </LightTooltip>
                         ))}
                     </div>
                     <div className={styles.right}>
@@ -119,7 +137,7 @@ const Navbar = ({ handleTheme }) => {
                                 <input type="text" placeholder="Search Quora" />
                             </div>
                         </div>
-                        <div className={styles.user_circle} onClick={handleOpen}>T</div>
+                        <div className={styles.user_circle} onClick={handleOpen}>M</div>
                         <span><Language /></span>
                         <div className={styles.add_ques} onClick={handleOpenQ}>Add question</div>
                     </div>

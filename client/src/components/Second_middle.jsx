@@ -8,7 +8,7 @@ const paper_secondmiddle = {
     marginBottom: "10px",
     height: "80px"
 };
-const Second_middle = () => {
+const SecondMiddle = () => {
 
     const [openQ, setOpenQ] = useState(false);
 
@@ -43,4 +43,4 @@ const Second_middle = () => {
     );
 };
 
-export default Second_middle;
+export default SecondMiddle;

@@ -1,0 +1,27 @@
+.main_part {
+    width: 40%;
+    margin: auto;
+    height: 100%;
+    padding: 20px 10px;
+    background: #fff;
+}
+
+.main_part>h5 {
+    margin: 9px 0;
+    font-size: 16px;
+    color: #3d3b3b;
+}
+
+.spaces>:first-child {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 5% 0;
+    color: #615c5c;
+}
+
+.spaces img {
+    height: 100px;
+    width: 100px;
+}

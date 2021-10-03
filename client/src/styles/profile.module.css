@@ -35,25 +35,30 @@ h1+div>p {
     cursor: pointer;
 }
 
-.profile_details {
+.profile_details, .follow_details {
     display: flex;
     margin-top: 50px;
     align-items: center;
     gap: 4%;
-    color: rgb(167, 162, 162);
+    color: rgb(151, 144, 144);
     font-size: 13px;
     font-weight: bold;
 }
 
-.profile_details>p {
-    padding: 9px 2px;
-    border-bottom: 4px solid #A82723;
+.follow_details {
+    margin-top: 8px;
 }
 
-.profile_details>p:hover {
+.profile_details>p, .follow_details>p {
+    padding: 10px 5px;
+    border-radius: 2px;
+    border-bottom: 3.4px solid #A82723;
+}
+
+.profile_details>p:hover, .follow_details>p:hover {
     cursor: pointer;
     opacity: 0.7;
-    background: rgb(235, 231, 231);
+    background: #EAEFFC;
     color: #413e3e;
 }
 
@@ -73,4 +78,22 @@ hr+h5 {
 .activity_div img {
     height: 100px;
     width: 100px;
+}
+
+.close {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #626466;
+}
+
+.close>:first-child {
+    padding: 6px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 22px;
+}
+
+.close>:first-child:hover {
+    background: #EAEFFC;
 }

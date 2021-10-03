@@ -20,6 +20,7 @@ app.use("/posts", postController);
 app.use("/questions", questionController);
 
 app.listen(PORT, async function () {
-  await connect();
-  console.log(`Listening on port ${PORT}`);
+    await connect();
+    console.log("connection has been established to mongoAtlas");
+    console.log(`App Listening on port http://localhost:${PORT}`);
 });
