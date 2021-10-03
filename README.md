@@ -18,10 +18,10 @@ cd ./quora-clone
 npm install
 ```
 
-**To run the react app execute below command**
+**To run the react app execute below command in client**
 
 ```
-npm run start
+npm run both 
 ```
 
 ## Built with
