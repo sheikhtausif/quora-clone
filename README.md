@@ -2,6 +2,7 @@
 
 [![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
 
+Quora is a social question-and-answer website where user can ask their questions and share their answers over the world.
 
 **To see the live site click the below link.**
 
@@ -21,7 +22,8 @@ npm install
 **To run the react app execute below command**
 
 ```
-npm run start
+cd ./client
+npm run both
 ```
 
 ## Built with
