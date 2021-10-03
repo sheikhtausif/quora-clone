@@ -47,7 +47,6 @@ router.get("/", authenticate, async function (req, res) {
 router.get("/myposts", authenticate, async function (req, res) {
   try {
     const posts = await Post.find({ postedBy: req.user.user._id })
-      .populate("postedBy", "_id name")
       .lean()
       .exec();
     return res.status(200).json({ posts });
@@ -75,7 +74,7 @@ router.put("/upvote", authenticate, (req, res) => {
   Post.findByIdAndUpdate(
     req.body.postId,
     {
-      $push: { upvotes: req.user.user._id },
+      $addToSet: { upvotes: req.user.user._id },
     },
     {
       new: true,

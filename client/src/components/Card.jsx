@@ -16,6 +16,7 @@ const Card = () => {
 
     const [current_user, setCurrentUser] = useState(null);
 
+  const [val,setVal]= useState(false)
     const dispatch = useDispatch();
     const { posts } = useSelector(state => state.app)
 
@@ -46,13 +47,14 @@ const Card = () => {
           .then(result => {
                 const newData = posts.map(item => {
                   if (item._id === result._id) {
+                    //console.log("result",result)
                         return result
                   } else {
-                     console.log(item)
+                    //  console.log(item)
                         return item
                     }
                 })
-                setData(newData)
+                setAllPost(newData)
             }).catch(err => {
                 console.log('err:', err)
 
@@ -113,13 +115,17 @@ const Card = () => {
   }
   const main_paper_card = {
       marginBottom: "5px",
-    }
+  }
+  const handleFollow = () => {
+      setVal(!val)
+  }
 
 
     return (
         <div className={styles.main_card_container}>
             
                 {allPost?.map((el, i) => {
+                    //console.log('el:', el)
                     return (
                       <div key={i}>
                         <Paper variant="outlined" square sx={main_paper_card}>
@@ -138,7 +144,7 @@ const Card = () => {
                                     <div>
                                         <div className={styles.user_intro}>
                                             <h4>{el?.postedBy?.name ? el.postedBy.name : current_user.name}</h4>
-                                            <Link to="#">Follow</Link>
+                                  <button style={{ background: "none", border: "none" }} onClick={() => handleFollow()}>{ val?"Unfollow":"Follow"}</button>
                                         </div>
 
                                         <div className={styles.user_about_date}>
@@ -172,7 +178,7 @@ const Card = () => {
                                             likePost(el._id);
                                         }}>
                                             <Upvote />
-                                            <p>12.4k</p>
+                                            <p>{el.upvotes.length}</p>
                                         </button>
 
                                         <button className={styles.button_voted}

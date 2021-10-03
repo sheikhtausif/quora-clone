@@ -30,6 +30,7 @@ const Navbar = ({ handleTheme }) => {
     const { state, dispatch } = useContext(UserContext)
     const history = useHistory()
     const { pathname } = history.location
+    
 
     const handleOpenQ = () => setOpenQ(true);
     const handleCloseQ = () => setOpenQ(false);
@@ -57,13 +58,15 @@ const Navbar = ({ handleTheme }) => {
         { icon: <Bookmark />, text: "Bookmarks" },
         { icon: <Draft />, text: "Drafts" },
     ]
-
+    const user=JSON.parse(localStorage.getItem("user"))
+    const userFName=(user.name).split("")
+    console.log('userFName:', userFName)
     const body = (
         <div className={styles.modal_body}>
             <div className={styles.profile_div}>
-                <div className={styles.profile_img}>M</div>
+                <div className={styles.profile_img}>{userFName[0]}</div>
                 <div onClick={handleProfile}>
-                    <h3>Mohd Tausif</h3>
+                    <h3>{user.name}</h3>
                     <GrNext />
                 </div>
             </div>
@@ -137,7 +140,7 @@ const Navbar = ({ handleTheme }) => {
                                 <input type="text" placeholder="Search Quora" />
                             </div>
                         </div>
-                        <div className={styles.user_circle} onClick={handleOpen}>M</div>
+                        <div className={styles.user_circle} onClick={handleOpen}>{userFName[0]}</div>
                         <span><Language /></span>
                         <div className={styles.add_ques} onClick={handleOpenQ}>Add question</div>
                     </div>

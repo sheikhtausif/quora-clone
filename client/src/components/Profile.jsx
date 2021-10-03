@@ -1,6 +1,7 @@
 import React from 'react'
-import { useState } from 'react'
+import { useState,useEffect } from 'react'
 import styles from '../styles/profile.module.css'
+import styled from "../styles/card.module.css";
 import Modal from '@material-ui/core/Modal';
 import Box from '@mui/material/Box';
 import { GrClose } from 'react-icons/gr';
@@ -14,6 +15,19 @@ const Profile = () => {
     const [followersA, setFollowersA] = useState(false)
     const [followText, setFollowText] = useState("")
     const [profileText, setProfileText] = useState("Profile")
+      const [mypics,setPics]=useState([])
+     
+
+     useEffect(()=>{
+       fetch('http://localhost:8000/posts/myposts',{
+           headers:{
+               "Authorization":"Bearer "+localStorage.getItem("jwt")
+           }
+       }).then(res=>res.json())
+       .then(result=>{
+           setPics(result.posts)
+       })
+    }, [mypics])
 
     const [open, setOpen] = useState(false);
     const handleOpen = (text) => {
@@ -86,19 +100,25 @@ const Profile = () => {
         outline: 'none',
         padding: "20px"
     };
+     const user=JSON.parse(localStorage.getItem("user"))
+    const userFName=(user.name).split("")
+    console.log('userFName:', userFName)
+
+    // let following = Math.floor(Math.random() * 100);
+    // let followers = Math.floor(Math.random() * 100);
 
     return (
         <>
             <div className={styles.main_part}>
                 <div className={styles.main_profile}>
                     <div className={styles.profile_img}>
-                        <span>M</span>
+                        <span>{userFName[0]}</span>
                     </div>
                     <div>
-                        <h1>Mohd Tausif</h1>
+                        <h1>{user.name}</h1>
                         <div>
-                            <p onClick={() => handleOpen('Followers')}>0 followers</p>
-                            <p onClick={() => handleOpen('Following')}>0 following</p>
+                            <p style={{marginRight:"30px"}} onClick={() => handleOpen('Followers')}>12 followers</p>
+                            <p onClick={() => handleOpen('Following')}>7 following</p>
                         </div>
                     </div>
                 </div>
@@ -110,7 +130,20 @@ const Profile = () => {
                 </div>
                 <hr />
                 <h5>{profileText}</h5>
-                <hr />
+                <hr/>
+                <div  >
+               {
+                   mypics.map((item,i)=>{
+                       return(
+                           <div style={{marginTop:"10px"}} key={i}>
+                               <h3>{item.title}</h3>
+                               <p>{item.body}</p>
+                            <img className={styled.post_images} src={item.photo} alt="images" />
+                        </div>  
+                       )
+                   })
+               }
+            </div>
                 <div className={styles.activity_div}>
                     <div>
                         <img className={styles} src="//qsf.fs.quoracdn.net/-4-ans_frontend_assets.images.empty_states.dormant_lightmode.png-26-c4532c98034818a0.png" alt="images"></img>
@@ -127,11 +160,11 @@ const Profile = () => {
                 <Box sx={style}>
                     <div className={styles.close}>
                         <GrClose onClick={handleClose} />
-                        <p>Mohd Tausif</p>
+                        <p>{user.name}</p>
                     </div>
                     <div className={styles.follow_details}>
-                        <p onClick={() => handleActiveFollowing("Followers")} style={followersA ? { borderBottom: '3.4px solid #A82723' } : { borderBottom: '3.4px solid #fff' }}>0 Followers</p>
-                        <p onClick={() => handleActiveFollowers("Following")} style={followingA ? { borderBottom: '3.4px solid #A82723' } : { borderBottom: '3.4px solid #fff' }}>0 Following</p>
+                        <p onClick={() => handleActiveFollowing("Followers")} style={followersA ? { borderBottom: '3.4px solid #A82723' } : { borderBottom: '3.4px solid #fff' }}>12 Followers</p>
+                        <p onClick={() => handleActiveFollowers("Following")} style={followingA ? { borderBottom: '3.4px solid #A82723' } : { borderBottom: '3.4px solid #fff' }}>7 Following</p>
                     </div>
                     <hr />
                     <h5>{followText}</h5>
