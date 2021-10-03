@@ -1,8 +1,20 @@
 import React from 'react'
+import { useEffect } from 'react'
 import styles from "../styles/answers.module.css"
+import { useDispatch, useSelector } from 'react-redux'
+import { getQuestion } from '../ReduxStore/App/actions'
 
 
 const Answer = () => {
+
+    const dispatch = useDispatch();
+    const { questions } = useSelector(state => state.app)
+    console.log('questions:', questions)
+
+    useEffect(() => {
+        dispatch(getQuestion())
+    }, [dispatch])
+
     return (
         <div>
             <div>

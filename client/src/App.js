@@ -11,7 +11,7 @@ import Main from "./components/Main";
 import Navbar from "./components/Navbar";
 import Profile from "./components/Profile";
 import { reducer, initialState } from "./store/reducer";
-import Front from "./components/LoginSignup/LoginSignup";
+import Front from "./components/LoginSignup";
 import Following from "./components/Following";
 import Answer from "./components/Answer";
 import Spaces from "./components/Spaces";
@@ -34,7 +34,7 @@ const Routing = () => {
         if (user) {
             dispatch({ type: "USER", payload: user });
         } else {
-            history.push("/registerr");
+            history.push("/register");
         }
         // eslint-disable-next-line
     }, []);
@@ -49,7 +49,7 @@ const Routing = () => {
                     <Navbar handleTheme={handleTheme} />
                     <Main />
                 </Route>
-                <Route exact path="/registerr">
+                <Route exact path="/register">
                     <Front />
                 </Route>
                 <Route exact path="/profile">

@@ -3,6 +3,8 @@ import { useState } from 'react'
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import styles from '../styles/question.module.css'
+import { useDispatch } from 'react-redux'
+import { addQuestion } from '../ReduxStore/App/actions'
 
 const style = {
     position: 'absolute',
@@ -20,10 +22,13 @@ const style = {
 
 const Question = ({ openQ, handleCloseQ }) => {
 
+    const dispatch = useDispatch()
+
     const [ques, setQues] = useState("")
 
-    const handleAddQues = () => {
+    const handleAddQues = (ques) => {
         console.log('ques:', ques)
+        dispatch(addQuestion(ques))
     }
 
     return (
@@ -51,7 +56,7 @@ const Question = ({ openQ, handleCloseQ }) => {
                     <hr style={{ color: '#c5c9c9', marginTop: "146px", backgroundColor: "#c5c9c9" }} />
                     <div className={styles.ques_btn}>
                         <button onClick={handleCloseQ}>Close</button>
-                        <button onClick={handleAddQues}>Add question</button>
+                        <button onClick={() => handleAddQues(ques)}>Add question</button>
                     </div>
                 </Box>
             </Modal>

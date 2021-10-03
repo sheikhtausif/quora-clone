@@ -8,7 +8,7 @@ router.post("", authenticate, async function (req, res) {
     const { question } = req.body;
     console.log('question:', question)
     if (!question) {
-        return res.status(422).json({ error: "Please Add All Required Fields" });
+        return res.status(400).json({ error: "Please Add All Required Fields" });
     }
 
     req.user.user.password = undefined;
