@@ -29,7 +29,10 @@ const Question = ({ openQ, handleCloseQ }) => {
     const handleAddQues = (ques) => {
         console.log('ques:', ques)
         dispatch(addQuestion(ques))
+        handleCloseQ()
     }
+
+    const user=JSON.parse(localStorage.getItem("user"))
 
     return (
         <div>
@@ -50,7 +53,7 @@ const Question = ({ openQ, handleCloseQ }) => {
                     </div>
 
                     <div className={styles.ques_div}>
-                        <p>Mohd Tausif asked</p>
+                        <p>{user?user.name:"UK"} asked</p>
                         <input type="text" placeholder="Start your question with 'What', 'How', 'Why' etc." onChange={e => setQues(e.target.value)} />
                     </div>
                     <hr style={{ color: '#c5c9c9', marginTop: "146px", backgroundColor: "#c5c9c9" }} />
