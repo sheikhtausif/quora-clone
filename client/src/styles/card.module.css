@@ -1,9 +1,11 @@
 
 .main_card_container {
-  height: 300px;
+  height: auto;
   width: 100%;
   margin: auto;
   /* border: 1px solid green; */
+  margin-top:10px;
+  cursor: pointer;
 }
 
 .dotted_share {
@@ -21,6 +23,8 @@
   line-height: 1.4;
   color: rgb(40, 40, 41);
   direction: ltr;
+
+  margin-top:10px;
 
   
 }
@@ -45,7 +49,7 @@
 }
 .post_images {
   height: 400px;
-  width: 532px;
+  width: 578px;
 }
 .answer {
   line-height: 1.3;

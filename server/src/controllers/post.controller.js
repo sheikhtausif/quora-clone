@@ -7,34 +7,31 @@ const authenticate = require("../middleware/authenticate");
 const Post = require("../models/post.model");
 
 router.post("/", authenticate, async function (req, res) {
-  const { title, body, pic } = req.body;
-  if (!title || !body || !pic) {
-    return res.status(422).json({ error: "Please Add All Required Fields" });
+  try {
+    const { title, body, photo } = req.body;
+    if (!title || !body || !photo) {
+      return res.status(422).json({ error: "Please Add All Required Fields" });
+    }
+
+    req.user.user.password = undefined;
+
+    const post = {
+      title,
+      body,
+      photo: photo,
+      postedBy: req.user.user,
+    };
+    const post2 = await Post.create(post);
+    return res.status(201).json({ post2 });
+  } catch (err) {
+    res.status(404).json({ err2: err.message });
   }
-
-  req.user.password = undefined;
-
-  const post = new Post({
-    title,
-    body,
-    photo: pic,
-    postedBy: req.user,
-  });
-
-  post
-    .save()
-    .then((result) => {
-      res.status(200).json({ post: result });
-    })
-    .catch((err) => {
-      console.log("err:", err);
-    });
 });
 
 router.get("/", authenticate, async function (req, res) {
   try {
     const posts = await Post.find()
-      .populate("postedBy", "_id name")
+      .populate("postedBy", "_id name pic")
       .populate("comments.postedBy", "_id name")
       .sort("-createdAt")
       .lean()

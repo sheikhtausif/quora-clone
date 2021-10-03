@@ -30,6 +30,10 @@ const textfields = {
   maxWidth: "100%",
 };
 
+const upload_button={
+  backgroundColor:"#2E69FF"
+}
+
 const rightData = [
   {
     images:
@@ -112,9 +116,10 @@ const Left = () => {
         .then((data) => {
           console.log(data);
           if (data.error) {
-          console.log('dataEE:', data.error)
+            console.log("dataEE:", data.error);
           } else {
-            console.log('datapost:', data)
+            console.log("datapost:", data);
+
             history.push("/");
           }
         })
@@ -135,12 +140,14 @@ const Left = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-       //console.log('data:PhotoUrl', data)
+        console.log("data:PhotoUrl", data);
         setUrl(data.url);
       })
       .catch((err) => {
         console.log("err:", err);
       });
+
+    setOpen(false);
   };
   return (
     <div className={styles.left_space}>
@@ -209,7 +216,7 @@ const Left = () => {
                       />
 
                       <Button
-                        color="secondary"
+                        sx={upload_button}
                         variant="contained"
                         component="span"
                       >
@@ -232,7 +239,7 @@ const Left = () => {
 
       {rightData.map((el, i) => {
         return (
-          <div className={styles.space_catogery}>
+          <div className={styles.space_catogery} key={i}>
             <div>
               <img
                 className={styles.space_catogery_image}
@@ -252,7 +259,14 @@ const Left = () => {
       <hr className={styles.space_catogery_hr} />
 
       <div className={styles.space_catogery_footer}>
-        <Footer />
+        <p>About</p>
+        <p>Careers</p>
+        <p>Terms</p>
+        <p>Privacy</p>
+        <p>Acceptable Use</p>
+        <p>Business</p>
+        <p>Press</p>
+        <p>Your Ad Choices</p>
       </div>
     </div>
   );

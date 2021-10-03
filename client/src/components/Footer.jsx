@@ -15,7 +15,7 @@ const Footer = () => {
   return (
     <div
       style={{
-        height: "80px",
+        height: "60px",
         width: "130px",
         display: "flex",
         gap:"2px",
@@ -26,7 +26,7 @@ const Footer = () => {
     >
       {footerData.map((el) => {
         return (
-          <div style={{ textAlign: "center", margin: "auto" }}>
+          <div style={{ textAlign: "center", margin: "auto",height:"20px",width:"100px" }}>
             <p>{`· ${el} `}</p>
           </div>
         );
