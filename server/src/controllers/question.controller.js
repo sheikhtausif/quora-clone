@@ -1,33 +1,36 @@
 const express = require("express");
-const Mongoose = require("mongoose");
+// const mongoose = require("mongoose");
 const router = express.Router();
 const authenticate = require("../middleware/authenticate");
 const Question = require("../models/question.model");
 
-router.post("/", authenticate, async function (req, res) {
-    const { question } = req.body;
-    if (!question) {
-        return res.status(422).json({ error: "Please Add All Required Fields" });
-    }
+router.post("", authenticate, async function (req, res) {
+    console.log(req.body);
+    // const { question } = req.body;
+    // console.log('question:', question)
+    // if (!question) {
+    //     return res.status(422).json({ error: "Please Add All Required Fields" });
+    // }
 
-    req.user.password = undefined;
 
-    const post = new Post({
-        question,
-        postedBy: req.user,
-    });
+    // req.user.password = undefined;
 
-    post
-        .save()
-        .then((result) => {
-            res.status(200).json({ post: result });
-        })
-        .catch((err) => {
-            console.log("err:", err);
-        });
+    // const post = new Post({
+    //     question,
+    //     postedBy: req.user,
+    // });
+
+    // post
+    //     .save()
+    //     .then((result) => {
+    //         res.status(200).json({ post: result });
+    //     })
+    //     .catch((err) => {
+    //         console.log("err:", err);
+    //     });
 });
 
-router.get("/", authenticate, async function (req, res) {
+router.get("", authenticate, async function (req, res) {
     try {
         const questions = await Question.find()
             .populate("postedBy", "_id name")

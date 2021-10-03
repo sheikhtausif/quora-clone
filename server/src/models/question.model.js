@@ -10,7 +10,7 @@ const questionSchema = new mongoose.Schema(
                 postedBy: { type: mongoose.Schema.Types.ObjectId, ref: "user" },
             },
         ],
-        postedBy: { type: mongoose.Schema.Types.ObjectId, ref: "user" },
+        postedBy: { type: mongoose.Schema.Types.ObjectId, ref: "user", },
     },
     {
         versionKey: false,
