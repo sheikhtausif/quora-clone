@@ -21,7 +21,8 @@ npm install
 **To run the react app execute below command**
 
 ```
-npm run start
+cd ./client
+npm run both
 ```
 
 ## Built with
