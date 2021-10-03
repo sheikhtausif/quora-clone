@@ -59,14 +59,13 @@ const Navbar = ({ handleTheme }) => {
         { icon: <Draft />, text: "Drafts" },
     ]
     const user=JSON.parse(localStorage.getItem("user"))
-    const userFName=(user.name).split("")
-    console.log('userFName:', userFName)
+    const userFName=(user?user.name:"UK").split("")
     const body = (
         <div className={styles.modal_body}>
             <div className={styles.profile_div}>
                 <div className={styles.profile_img}>{userFName[0]}</div>
                 <div onClick={handleProfile}>
-                    <h3>{user.name}</h3>
+                    <h3>{user?user.name:"UK"}</h3>
                     <GrNext />
                 </div>
             </div>

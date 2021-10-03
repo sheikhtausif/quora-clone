@@ -166,6 +166,7 @@ export default function Front() {
                 console.log("val", password, email);
                 if (data.error) {
                     alert(data.error);
+                    return
                 } else {
                     localStorage.setItem("jwt", data.token);
                     localStorage.setItem("user", JSON.stringify(data.user));
@@ -185,7 +186,8 @@ export default function Front() {
                     .then((res) => res.json())
                     .then((data) => {
                         if (data.error) {
-                            console.log("dataERR:", data);
+                          alert(data.error);
+                    return
                         } else {
                             localStorage.setItem("jwt", data.token);
                             localStorage.setItem("user", JSON.stringify(data.user));
@@ -284,7 +286,7 @@ export default function Front() {
                                 onChange={(e) => {
                                     setPasword(e.target.value);
                                 }}
-                                type="text"
+                                type="password"
                                 placeholder="Your Password"
                             />
                         </div>
@@ -352,7 +354,7 @@ export default function Front() {
                         />
                         <h5>Password</h5>
                         <input
-                            type="text"
+                            type="password"
                             value={password2}
                             onChange={(e) => setPassword2(e.target.value)}
                             placeholder="Your Password"

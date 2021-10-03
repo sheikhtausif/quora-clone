@@ -101,8 +101,8 @@ const Profile = () => {
         padding: "20px"
     };
      const user=JSON.parse(localStorage.getItem("user"))
-    const userFName=(user.name).split("")
-    console.log('userFName:', userFName)
+    const userFName=(user?user.name:"UK").split("")
+    //console.log('userFName:', userFName)
 
     // let following = Math.floor(Math.random() * 100);
     // let followers = Math.floor(Math.random() * 100);
@@ -115,7 +115,7 @@ const Profile = () => {
                         <span>{userFName[0]}</span>
                     </div>
                     <div>
-                        <h1>{user.name}</h1>
+                        <h1>{user?user.name:"A"}</h1>
                         <div>
                             <p style={{marginRight:"30px"}} onClick={() => handleOpen('Followers')}>12 followers</p>
                             <p onClick={() => handleOpen('Following')}>7 following</p>

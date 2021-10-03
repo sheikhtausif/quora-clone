@@ -15,6 +15,7 @@ import { getPost } from '../ReduxStore/App/actions'
 const Card = () => {
 
     const [current_user, setCurrentUser] = useState(null);
+    const [upvote,setUpvote] = useState(false);
 
   const [val,setVal]= useState(false)
     const dispatch = useDispatch();
@@ -143,7 +144,7 @@ const Card = () => {
 
                                     <div>
                                         <div className={styles.user_intro}>
-                                            <h4>{el?.postedBy?.name ? el.postedBy.name : current_user.name}</h4>
+                                            <h3>{el?.postedBy?.name ? el.postedBy.name : current_user.name}</h3>
                                   <button style={{ background: "none", border: "none" }} onClick={() => handleFollow()}>{ val?"Unfollow":"Follow"}</button>
                                         </div>
 
@@ -175,10 +176,11 @@ const Card = () => {
                                 <div className={styles.cardlast_section}>
                                     <div className={styles.vote}>
                                         <button className={styles.button_upvoted} onClick={() => {
-                                            likePost(el._id);
+                                                likePost(el._id);
+                                                setUpvote(!upvote)
                                         }}>
-                                            <Upvote />
-                                            <p>{el.upvotes.length}</p>
+                                            <Upvote upvote={upvote}/>
+                                            <p>{el?.upvotes?.length ?el.upvotes.length:"0"}</p>
                                         </button>
 
                                         <button className={styles.button_voted}
@@ -192,14 +194,14 @@ const Card = () => {
                                     <div className={styles.share}>
                                         <button className={styles.button_upvoted}>
                                             <Share />
-                                            <p>78</p>
+                                            <p>0</p>
                                         </button>
                                     </div>
 
                                     <div className={styles.comments}>
                                         <button className={styles.button_upvoted}>
                                             <Comments />
-                                            <p>68</p>
+                                            <p>0</p>
                                         </button>
                                     </div>
                                 </div>
