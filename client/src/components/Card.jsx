@@ -1,6 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
-import { UserContext } from "../App";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
 import styles from "../styles/card.module.css";
 import Paper from "@mui/material/Paper";
 import Upvote from "../svg/Upvote";

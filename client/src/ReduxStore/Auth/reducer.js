@@ -8,7 +8,8 @@ const initialState = {
     isAuth: false,
     isLoading: false,
     isError: false,
-    token: ''
+    token: '',
+    user: {}
 }
 
 export const authReducer = (state = initialState, { type, payload }) => {
@@ -19,7 +20,7 @@ export const authReducer = (state = initialState, { type, payload }) => {
             }
         case SIGNUP_SUCCESS:
             return {
-                ...state, isLoading: false, isError: false
+                ...state, isLoading: false, isError: false,
             }
         case SIGNUP_FAILURE:
             return {
@@ -31,7 +32,7 @@ export const authReducer = (state = initialState, { type, payload }) => {
             }
         case LOGIN_SUCCESS:
             return {
-                ...state, isLoading: false, isError: false, isAuth: true, token: payload
+                ...state, isLoading: false, isError: false, isAuth: true, token: payload.token, user: payload.user
             }
         case LOGIN_FAILURE:
             return {

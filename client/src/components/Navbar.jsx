@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { useHistory, Link } from 'react-router-dom'
 import styles from '../styles/navbar.module.css'
 import Logo from '../svg/Logo'
@@ -18,7 +18,6 @@ import Draft from '../svg/Draft'
 import Modal from '@material-ui/core/Modal';
 import { GrNext } from 'react-icons/gr';
 import Question from './Question'
-import { UserContext } from '../App'
 import Tooltip, { tooltipClasses } from '@mui/material/Tooltip';
 import { styled } from '@mui/material/styles';
 import { Active, NoActive } from '../styles/ActiveStyled'
@@ -27,10 +26,9 @@ const Navbar = ({ handleTheme }) => {
     const [open, setOpen] = useState(false);
     const [openQ, setOpenQ] = useState(false);
     // eslint-disable-next-line
-    const { state, dispatch } = useContext(UserContext)
     const history = useHistory()
     const { pathname } = history.location
-    
+
 
     const handleOpenQ = () => setOpenQ(true);
     const handleCloseQ = () => setOpenQ(false);
@@ -58,14 +56,14 @@ const Navbar = ({ handleTheme }) => {
         { icon: <Bookmark />, text: "Bookmarks" },
         { icon: <Draft />, text: "Drafts" },
     ]
-    const user=JSON.parse(localStorage.getItem("user"))
-    const userFName=(user?user.name:"UK").split("")
+    const user = JSON.parse(localStorage.getItem("user"))
+    const userFName = (user ? user.name : "UK").split("")
     const body = (
         <div className={styles.modal_body}>
             <div className={styles.profile_div}>
                 <div className={styles.profile_img}>{userFName[0]}</div>
                 <div onClick={handleProfile}>
-                    <h3>{user?user.name:"UK"}</h3>
+                    <h3>{user ? user.name : "UK"}</h3>
                     <GrNext />
                 </div>
             </div>
@@ -89,7 +87,6 @@ const Navbar = ({ handleTheme }) => {
                 <p>Help</p>
                 <p onClick={() => {
                     localStorage.clear()
-                    dispatch({ type: "CLEAR" })
                     history.push('/register')
                 }}>Logout</p>
             </div>

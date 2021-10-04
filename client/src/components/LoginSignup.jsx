@@ -1,14 +1,20 @@
 import styles from "../styles/login.module.css";
-import React, { useState, useContext, useEffect } from "react";
-import { useHistory } from "react-router-dom";
-import { UserContext } from "../App";
+import React, { useState, } from "react";
+// import {  useEffect } from "react";
 import { styled, Box } from "@mui/system";
 import ModalUnstyled from "@mui/core/ModalUnstyled";
 import ClearIcon from "@mui/icons-material/Clear";
 import { FcGoogle } from "react-icons/fc";
 import { SiFacebook } from "react-icons/si";
-// import Alert from "@mui/material/Alert";
 import { RiArrowRightSLine } from "react-icons/ri";
+import { useDispatch } from 'react-redux'
+import { login, signup } from '../ReduxStore/Auth/actions'
+import swal from 'sweetalert'
+import { useSelector } from 'react-redux'
+import { useHistory } from "react-router-dom";
+
+
+
 const StyledModal = styled(ModalUnstyled)`
   position: fixed;
   z-index: 1300;
@@ -43,54 +49,55 @@ const style = {
 };
 
 export default function Front() {
-    // eslint-disable-next-line
-    const { state, dispatch } = useContext(UserContext);
-    const history = useHistory();
     const [open, setOpen] = useState(false);
-    const [color, setColor] = useState("white");
-    const [color1, setColor1] = useState("white");
-    //login func
-    const [password, setPasword] = useState("");
+    const dispatch = useDispatch()
+    const history = useHistory();
+
+    const { isAuth } = useSelector(state => state.auth)
+    if (isAuth) history.push('/')
+
+    //login fields
+    const [password, setPassword] = useState("");
     const [email, setEmail] = useState("");
 
-    /*signup func*/
+    // signup fields
     const [name2, setName2] = useState("");
     const [email2, setEmail2] = useState("");
     const [password2, setPassword2] = useState("");
 
     // eslint-disable-next-line
     const [image, setImage] = useState("");
+    // eslint-disable-next-line
     const [url, setUrl] = useState(undefined);
-
-    useEffect(() => {
-        if (url) {
-            uploadFields();
-        }
-        // eslint-disable-next-line
-    }, [url]);
 
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
-    const handleMouseEnter = (e) => {
-        e.target.style.background = "#f6f6f6";
+    const handleLogin = () => {
+        const payload = { email: email, password: password }
+
+        if (password && email) dispatch(login(payload))
+        else {
+            swal({
+                title: "Please fill all the fields!",
+                icon: "info",
+                button: "Ok",
+            });
+        }
     };
-    const handleMouseLeave = (e) => {
-        e.target.style.background = "white";
-    };
-    const handleMouseEnter1 = (e) => {
-        setColor("#f6f6f6");
-    };
-    const handleMouseLeave1 = (e) => {
-        setColor("white");
-    };
-    const handleMouseEnter11 = (e) => {
-        setColor1("#f6f6f6");
-    };
-    const handleMouseLeave11 = (e) => {
-        setColor1("white");
+    const handleSignup = () => {
+        const payload = { name: name2, password: password2, email: email2 }
+        if (name2 && password2 && email2) dispatch(signup(payload))
+        else {
+            swal({
+                title: "Please fill all the fields!",
+                icon: "info",
+                button: "Ok",
+            });
+        }
     };
 
+    // eslint-disable-next-line
     const uploadPic = () => {
         const data = new FormData();
         data.append("file", image);
@@ -109,153 +116,38 @@ export default function Front() {
             });
     };
 
-    const uploadFields = () => {
-        if (!/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email2)
-        ) {
-            console.log("email", email2);
-            alert("Please Add Valid Inputs");
-            return;
-        }
-        fetch("http://localhost:8000/register", {
-            method: "post",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                name: name2,
-                password: password2,
-                email: email2,
-                pic: url,
-            }),
-        })
-            .then((res) => res.json())
-            .then((data) => {
-                if (data.error) {
-                    console.log("dataERR:", data.err);
-                } else {
-                    console.log("dataSign:", data);
-                    setOpen(false);
-                    // history.push("/register");
-                }
-            })
-            .catch((err) => {
-                console.log(err);
-            });
-    };
-
-    const PostData = (e) => {
-        e.preventDefault();
-        if (// eslint-disable-next-line
-            !/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email)) {
-            alert("Please Add Valid Inputs")
-            return;
-        }
-        fetch("http://localhost:8000/login", {
-            method: "post",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                password: password,
-                email: email,
-            }),
-        })
-            .then((res) => res.json())
-            .then((data) => {
-                console.log("data:check", data);
-                console.log("val", password, email);
-                if (data.error) {
-                    alert(data.error);
-                    return
-                } else {
-                    localStorage.setItem("jwt", data.token);
-                    localStorage.setItem("user", JSON.stringify(data.user));
-                    dispatch({ type: "USER", payload: data.user });
-                    history.push("/");
-                }
-                fetch("http://localhost:8000/login", {
-                    method: "post",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({
-                        password,
-                        email,
-                    }),
-                })
-                    .then((res) => res.json())
-                    .then((data) => {
-                        if (data.error) {
-                            alert(data.error);
-                            return
-                        } else {
-                            localStorage.setItem("jwt", data.token);
-                            localStorage.setItem("user", JSON.stringify(data.user));
-                            dispatch({ type: "USER", payload: data.user });
-                            history.push("/");
-                        }
-                    })
-                    .catch((err) => {
-                        console.log("err", err);
-                    });
-            });
-    };
-    // eslint-disable-next-line
-    const handleLogin = (payload) => {
-        console.log(payload);
-    };
-    const handleSignup = (e) => {
-        if (image) {
-            uploadPic();
-        } else {
-            uploadFields();
-        }
-    };
-
     return (
         <div className={styles.container}>
             <div className={styles.container1stdiv}>
                 <div className={styles.container1stdiv1stDiv}>
                     <img
                         src="https://qph.fs.quoracdn.net/main-qimg-ef72851415469d38c90bf2f25427e116"
-                        alt="done"
-                    />
+                        alt="done" />
                     <h4>A place to share knowledge and better understand the world</h4>
                 </div>
 
                 <div className={styles.container1stdiv2ndDiv}>
                     <div className={styles.container1stdiv2ndDiv1stDiv}>
                         <div
-                            style={{ backgroundColor: `${color1}` }}
-                            onMouseEnter={handleMouseEnter11}
-                            onMouseLeave={handleMouseLeave11}
-                            className={styles.googleDiv}
-                        >
+                            className={styles.googleDiv}>
                             <FcGoogle style={{ fontSize: "23px" }} />
                             <h4 style={{ fontWeight: "lighter" }}>Continue with Google</h4>
                         </div>
 
                         <div
-                            onMouseEnter={handleMouseEnter1}
-                            onMouseLeave={handleMouseLeave1}
-                            style={{ marginTop: "10px", backgroundColor: `${color}` }}
-                            className={styles.googleDiv}
-                        >
+                            style={{ marginTop: "10px", }}
+                            className={styles.googleDiv}>
                             <SiFacebook style={{ fontSize: "23px", color: "#0B82ED" }} />
                             <h4 style={{ fontWeight: "lighter" }}>Continue with Facebook</h4>
                         </div>
                         <button
-                            onMouseEnter={handleMouseEnter}
-                            onMouseLeave={handleMouseLeave}
                             onClick={handleOpen}
-                            className={styles.emailbutton}
-                        >
+                            className={styles.emailbutton}>
                             Sign up with email
                         </button>
                         <div style={{ height: "1px", backgroundColor: "#E6E7E8" }}></div>
                         <h5
-                            style={{ color: "grey", marginTop: "8px", fontWeight: "normal" }}
-                        >
+                            style={{ color: "grey", marginTop: "8px", fontWeight: "normal" }}>
                             By continuing you indicate that you agree to Quora’s Terms of
                             Service and Privacy Policy.
                         </h5>
@@ -268,8 +160,8 @@ export default function Front() {
                                 height: "1px",
                                 backgroundColor: "#E6E7E8",
                                 marginTop: "10px",
-                            }}
-                        ></div>
+                            }}>
+                        </div>
                         <div style={{ marginTop: "18px" }}>
                             <p className={styles.inputsLabel}>Email</p>
                             <input
@@ -283,9 +175,7 @@ export default function Front() {
                             <input
                                 className={styles.inputdiv}
                                 value={password}
-                                onChange={(e) => {
-                                    setPasword(e.target.value);
-                                }}
+                                onChange={(e) => { setPassword(e.target.value); }}
                                 type="password"
                                 placeholder="Your Password"
                             />
@@ -294,10 +184,7 @@ export default function Front() {
                             <h5 style={{ color: "grey", fontWeight: "normal" }}>
                                 Forgot password?
                             </h5>
-
-                            <button type="submit" onClick={(e) => PostData(e)}>
-                                Login
-                            </button>
+                            <button type="submit" onClick={handleLogin}>Login</button>
                         </div>
                     </div>
                 </div>
@@ -327,15 +214,11 @@ export default function Front() {
                 aria-describedby="unstyled-modal-description"
                 open={open}
                 onClose={handleClose}
-                BackdropComponent={Backdrop}
-            >
+                BackdropComponent={Backdrop}>
                 <Box sx={style}>
                     <ClearIcon
                         className={styles.boxCloseIcon}
-                        onMouseEnter={handleMouseEnter}
-                        onMouseLeave={handleMouseLeave}
-                        onClick={handleClose}
-                    />
+                        onClick={handleClose} />
                     <div className={styles.modelDiv}>
                         <h3 style={{ marginBottom: "20px", marginTop: "5px" }}>Sign up</h3>
                         <h5>Name</h5>
@@ -363,11 +246,8 @@ export default function Front() {
                     <div className={styles.modelBorderDiv}></div>
 
                     <button
-                        onClick={() => {
-                            handleSignup();
-                        }}
-                        className={styles.modelButton}
-                    >
+                        onClick={handleSignup}
+                        className={styles.modelButton}>
                         Sign up
                     </button>
                 </Box>
