@@ -16,14 +16,22 @@ Executing the commands mentioned below one by one in your command line will help
 ```
 git clone https://github.com/sheikhtausif/quora-clone.git
 cd ./quora-clone
-npm install
 ```
 
 **To run the react app execute below command**
 
 ```
 cd ./client
-npm run both
+npm install
+npm start
+```
+
+**To run the server app execute below command**
+
+```
+cd ./server
+npm install
+npm start
 ```
 
 ## Built with
