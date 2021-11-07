@@ -4,7 +4,7 @@
 
 Quora is a social question-and-answer website where user can ask their questions and share their answers over the world.
 
-**To see the live site click the below link.**
+<!-- **To see the live site click the below link.** -->
 
 
 
